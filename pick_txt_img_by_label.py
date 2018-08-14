@@ -25,7 +25,6 @@ def parse_args():
 
  
 def pick(txt_dir, img_dir):
-
     dst_label = "./pickedLabel"
     dst_img = "./pickedImg"
     if not os.path.exists(dst_label):
@@ -36,12 +35,12 @@ def pick(txt_dir, img_dir):
 
     filelist = os.listdir(txt_dir)
     for file in filelist:
-    	fileInfor = file.split(".")
-    	txtpath = txt_dir + "/" + file
-    	txtfile = open(txtpath, "r")
-    	lines = txtfile.read().split('\n')[:-1] # the last symbol is " "
         print(file + "-->start!")
-    	for line in lines:
+        fileInfor = file.split(".")
+        txtpath = txt_dir + "/" + file
+        txtfile = open(txtpath, "r")
+        lines = txtfile.read().split('\n')[:-1] # the last symbol is " "
+        for line in lines:
                 obj = line.split(" ")[0]
                 if not obj in labelset:
                     continue
