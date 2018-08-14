@@ -40,6 +40,7 @@ def pick(txt_dir, img_dir):
     	txtpath = txt_dir + "/" + file
     	txtfile = open(txtpath, "r")
     	lines = txtfile.read().split('\n')[:-1] # the last symbol is " "
+        print(file + "-->start!")
     	for line in lines:
                 obj = line.split(" ")[0]
                 if not obj in labelset:
