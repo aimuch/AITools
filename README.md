@@ -1,9 +1,11 @@
 # 脚本工具箱
 - copyfiles.py ： 文件/文件夹复制脚本
-- create_txt_list.py ： VOC数据集main/train.txt等txt制作脚本
+- create_txt_list.py ： 创建VOC-like的txt文件，其中Main文件夹下的只有文件名，当前文件夹下的是完整的目录
     ```
-    input: python create_txt_list.py "/home/andy/Data/"
+    input: python create_txt_list.py "/home/andy/Data/img"
     output: 
+        ./VOC/ImageSets/Main/train.txt
+        ./VOC/ImageSets/Main/val.txt
         ./train.txt
         ./val.txt
     ```
