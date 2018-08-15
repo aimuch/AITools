@@ -29,3 +29,11 @@
         ./xml
     ```
 - xml2txt.py　：　VOC数据集xml标签转YOLO需要的txt格式的标签脚本
+    ```
+    input : python xml2txt.py "/home/andy/data/xml"  "/home/andy/data/img"
+    output :
+        ./txt
+        ./train.txt
+        ./val.txt
+        ./trianAll.txt
+    ```
