@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 # Author : Andy Liu
 # Last modified: 2018-8-14
-
+# This tool is used to covert YOLO v3 txt format label to VOC2007 format label
+# input : python txt2xml.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+# output:
+#	./xml
 
 
 from xml.dom.minidom import Document

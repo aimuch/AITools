@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 # Author : Andy Liu
 # Last modified: 2018-8-14
-
-
+# This tool is used to pick .txt and image by label
+# input : python pick_txt_img_by_label.py  "/home/andy/data/label_dir/"  "/home/andy/data/img_dir/" 
+# output : 
+#	./pickedLabel
+#	./pickedImg
 
 from xml.dom.minidom import Document
 import os

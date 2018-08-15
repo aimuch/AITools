@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# Author : Andy Liu
+# Last modified: 2018-8-15
+
+# This tool is used to create txt file by reading image folder
+# input: python create_txt_list.py "/home/andy/Data/"
+# output: 
+#	./train.txt
+#	./val.txt
+
 import argparse, os
 from os import listdir, getcwd
 from os.path import join

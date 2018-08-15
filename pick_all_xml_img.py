@@ -4,8 +4,10 @@
 
 # This tool is used to pick xml and image from the some folder
 # This file should put on the same path with the folder
-# ../pickedLabel
-# ../pickedImg
+# input: python pick_all_xml_img.py "/home/andy/data/img"
+# output:
+# 	./pickedLabel
+# 	./pickedImg
 
 import os
 import shutil

@@ -24,7 +24,7 @@ def mycopyfile(srcfile,dstfile):
         shutil.copyfile(srcfile,dstfile)      #复制文件
         print "copy %s -> %s"%( srcfile,dstfile)
 
-srcfile='/Users/xxx/git/project1/test.sh'
-dstfile='/Users/xxx/tmp/tmp/1/test.sh'
+srcfile='/home/andy/test.py'
+dstfile='/home/andy/devWorkSpace/test.py'
 
 mymovefile(srcfile,dstfile)
