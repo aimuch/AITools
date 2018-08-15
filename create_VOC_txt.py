@@ -26,9 +26,11 @@ def parse_args():
     return args
 
 def makelist(srcdir):
-    os.makedirs("./VOC/ImageSets/Main")
-    main_train_txt = "./VOC/ImageSets/Main/train.txt"
-    main_val_train = "./VOC/ImageSets/Main/val.txt"
+    folderPath = "./VOC/ImageSets/Main"
+    if not os.path.exists(folderPath):
+        os.makedirs(folderPath)
+    main_train_txt = folderPath + "/train.txt"
+    main_val_train = folderPath + "/val.txt"
     train_path_txt = "./train.txt"
     val_path_txt = "./val.txt"
     main_train_file=open(main_train_txt,'w+')   # 'w+' rewrite, 'a' add
