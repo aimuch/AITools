@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Reference VOC scrips
 # Author : Andy Liu
 # last modify : 2018-08-15
@@ -11,7 +12,6 @@
 #		./val.txt
 #		./trianAll.txt
 
-
 import xml.etree.ElementTree as ET
 import random
 import pickle
@@ -23,7 +23,8 @@ from os.path import join
 
 #sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
 
-classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]#顺序要跟voc.names顺序一致
+#classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]#顺序要跟voc.names顺序一致
+classes = ["person","rider","motor","car","bus","truck","ts","tl_g","tl_r","tl_y","tl_n","50","60","30","20","40","80","15","5"]#顺序要跟voc.names顺序一致
 
 def parse_args():
     parser = argparse.ArgumentParser()
