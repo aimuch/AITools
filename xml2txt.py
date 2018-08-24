@@ -48,6 +48,8 @@ def convert(size, box):
     return (x,y,w,h)
 
 def convert_annotation(xml_dir, img_dir):
+    xml_dir = os.path.abspath(xml_dir)
+    img_dir = os.path.abspath(img_dir)
     filelist = os.listdir(xml_dir)
 
     trainnum = int(len(filelist)*0.7)
@@ -92,6 +94,9 @@ def convert_annotation(xml_dir, img_dir):
             b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text), float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
             bb = convert((w,h), b)
             out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
+    
+    print("Path of train text = ", os.path.abspath(txt_train_path))
+    print("Path of valid text = ", os.path.abspath(txt_val_path))
 
 if __name__ == '__main__':
     args = parse_args()

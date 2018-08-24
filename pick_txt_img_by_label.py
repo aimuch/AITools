@@ -30,6 +30,9 @@ def parse_args():
 def pick(txt_dir, img_dir):
     dst_label = "./pickedLabel"
     dst_img = "./pickedImg"
+    txt_dir = os.path.abspath(txt_dir)
+    img_dir = os.path.abspath(img_dir)
+
     if not os.path.exists(dst_label):
         os.mkdir(dst_label)
     if not os.path.exists(dst_img):
@@ -59,6 +62,8 @@ def pick(txt_dir, img_dir):
 
                 shutil.copyfile(txtpath, dst_label_file)
                 shutil.copyfile(srcimg, dst_img_file)
+    print("Path of picked labels = ",os.path.abspath(dst_label))
+    print("Path of picked images = ",os.path.abspath(dst_img))
 
 if __name__ == '__main__':
     args = parse_args()

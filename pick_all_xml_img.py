@@ -27,10 +27,11 @@ def parse_args():
 def pick(srcdir):
     pickedLabel_dir = "./pickedLabel"
     pickedImg_dir = "./pickedImg"
+    srcdir = os.path.abspath(srcdir)
 
     # remake folder
     if os.path.exists(pickedLabel_dir):
-        hutil.rmtree(pickedLabel_dir)
+        shutil.rmtree(pickedLabel_dir)
     os.makedirs(pickedLabel_dir) 
 
     if os.path.exists(pickedImg_dir):
@@ -58,6 +59,8 @@ def pick(srcdir):
 		
         shutil.copyfile(src_label, dst_label)
         shutil.copyfile(src_img, dst_img)
+    print("Path of picked labels = ",os.path.abspath(pickedLabel_dir))
+    print("Path of picked images = ",os.path.abspath(pickedImg_dir))
 
 if __name__ == '__main__':
     args = parse_args()

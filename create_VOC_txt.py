@@ -11,7 +11,7 @@
 #	./val.txt
 
 import argparse
-import os
+import os,sys
 import random
 from os import listdir, getcwd
 from os.path import join
@@ -26,6 +26,7 @@ def parse_args():
     return args
 
 def makelist(srcdir):
+    srcdir = os.path.abspath(srcdir)
     folderPath = "./VOC/ImageSets/Main"
     if not os.path.exists(folderPath):
         os.makedirs(folderPath)
@@ -56,6 +57,9 @@ def makelist(srcdir):
     train_file.close()
     val_file.close()
 
+    print("Path of ImageSets_Main = ",os.path.abspath(folderPath))
+    print("Path of train text = ",os.path.abspath(train_path_txt))
+    print("Path of valid text = ",os.path.abspath(val_path_txt))
 
 if __name__ == '__main__':
     args = parse_args()

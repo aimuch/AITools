@@ -220,3 +220,4 @@ if __name__ == '__main__':
             writeXml(temp, imgpath, width, height, objs, filename)
         os.rmdir(temp)
     print("Done!")
+    print("Path of .xml = ", os.path.abspath(xml_dir))
