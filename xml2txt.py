@@ -23,8 +23,8 @@ from os.path import join
 
 #sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
 
-#classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]#顺序要跟voc.names顺序一致
-classes = ["person","rider","motor","car","bus","truck","ts","tl_g","tl_r","tl_y","tl_n","50","60","30","20","40","80","15","5"]#顺序要跟voc.names顺序一致
+classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]#顺序要跟voc.names顺序一致
+#classes = ["person","rider","motor","car","bus","truck","ts","tl_g","tl_r","tl_y","tl_n","50","60","30","20","40","80","15","5"]#顺序要跟voc.names顺序一致
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -49,7 +49,13 @@ def convert(size, box):
 
 def convert_annotation(xml_dir, img_dir):
     xml_dir = os.path.abspath(xml_dir)
+    if xml_dir[-1] == "/":
+        xml_dir = xml_dir[:-1]
     img_dir = os.path.abspath(img_dir)
+    if img_dir[-1] == "/":
+        img_dir = img_dir[:-1]
+    print(xml_dir)
+    print(img_dir)
     filelist = os.listdir(xml_dir)
 
     trainnum = int(len(filelist)*0.7)
@@ -95,6 +101,7 @@ def convert_annotation(xml_dir, img_dir):
             bb = convert((w,h), b)
             out_file.write(str(cls_id) + " " + " ".join([str(a) for a in bb]) + '\n')
     
+    print("Path of txt folder = ", os.path.abspath(txt_dir))
     print("Path of train text = ", os.path.abspath(txt_train_path))
     print("Path of valid text = ", os.path.abspath(txt_val_path))
 

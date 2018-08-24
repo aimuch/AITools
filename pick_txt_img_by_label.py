@@ -32,6 +32,10 @@ def pick(txt_dir, img_dir):
     dst_img = "./pickedImg"
     txt_dir = os.path.abspath(txt_dir)
     img_dir = os.path.abspath(img_dir)
+    if txt_dir[-1] == "/":
+        txt_dir = txt_dir[:-1]
+    if img_dir[-1] == "/":
+        img_dir = img_dir[:-1]
 
     if not os.path.exists(dst_label):
         os.mkdir(dst_label)

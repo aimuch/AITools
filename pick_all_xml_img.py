@@ -28,6 +28,8 @@ def pick(srcdir):
     pickedLabel_dir = "./pickedLabel"
     pickedImg_dir = "./pickedImg"
     srcdir = os.path.abspath(srcdir)
+    if srcdir[-1] == "/":
+        srcdir = srcdir[:-1]
 
     # remake folder
     if os.path.exists(pickedLabel_dir):

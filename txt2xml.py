@@ -180,6 +180,11 @@ if __name__ == '__main__':
     if not os.path.exists(xml_dir):
         os.mkdir(xml_dir)
 
+    if ann_dir[-1] == "/":
+        ann_dir = ann_dir[:-1]
+    if img_dir[-1] == "/":
+        img_dir = img_dir[:-1]
+
     if not os.path.exists(ann_dir):
         print("Error !!! %s is not exists, please check the parameter"%ann_dir)
         sys.exit(0)

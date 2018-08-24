@@ -27,6 +27,8 @@ def parse_args():
 
 def makelist(srcdir):
     srcdir = os.path.abspath(srcdir)
+    if srcdir[-1] == "/":
+        srcdir = srcdir[:-1]
     folderPath = "./VOC/ImageSets/Main"
     if not os.path.exists(folderPath):
         os.makedirs(folderPath)
