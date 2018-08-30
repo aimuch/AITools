@@ -1,4 +1,5 @@
 # 脚本工具箱
+- grid.xlsx：可打印的网络格子
 - copyfiles.py ： 文件/文件夹复制脚本
 - create_txt_list.py ： 创建VOC-like的txt文件，其中Main文件夹下的只有文件名，当前文件夹下的是完整的目录
     ```
