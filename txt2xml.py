@@ -176,6 +176,13 @@ if __name__ == '__main__':
     args = parse_args()
     ann_dir = args.ann_dir
     img_dir = args.img_dir
+    if not os.path.exists(ann_dir):
+        print("Error !!! %s is not exists, please check the parameter"%ann_dir)
+        sys.exit(0)
+    if not os.path.exists(img_dir):
+        print("Error !!! %s is not exists, please check the parameter"%img_dir)
+        sys.exit(0)
+
     xml_dir = "./xml"
     if not os.path.exists(xml_dir):
         os.mkdir(xml_dir)
@@ -184,13 +191,6 @@ if __name__ == '__main__':
         ann_dir = ann_dir[:-1]
     if img_dir[-1] == "/":
         img_dir = img_dir[:-1]
-
-    if not os.path.exists(ann_dir):
-        print("Error !!! %s is not exists, please check the parameter"%ann_dir)
-        sys.exit(0)
-    if not os.path.exists(img_dir):
-        print("Error !!! %s is not exists, please check the parameter"%img_dir)
-        sys.exit(0)
     
 
     for files in os.walk(ann_dir): # os.walk return (root,dirs,files)

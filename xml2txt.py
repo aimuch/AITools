@@ -23,7 +23,8 @@ from os.path import join
 
 #sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
 
-classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]#顺序要跟voc.names顺序一致
+classes = ["7","8"] #顺序要跟voc.names顺序一致
+#classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]
 #classes = ["person","rider","motor","car","bus","truck","ts","tl_g","tl_r","tl_y","tl_n","50","60","30","20","40","80","15","5"]#顺序要跟voc.names顺序一致
 
 def parse_args():
@@ -69,6 +70,7 @@ def convert_annotation(xml_dir, img_dir):
     txt_train_list = open(txt_train_path, 'w')
     txt_val_list = open(txt_val_path, 'w')
     for file in filelist:
+        print(file + "-->start!")
         fileInfor = file.split(".")
         in_file = open(xml_dir + "/" + file)
         out_file = open(txt_dir + "/" + fileInfor[0] + ".txt", 'w')

@@ -41,3 +41,11 @@
         ./val.txt
         ./trianAll.txt
     ```
+
+- [rm_empty_txt.py](./rm_empty_txt.py) : 提取text文件夹中非空的text文件
+    ```
+    input : python rm_empty_txt.py "/home/andy/data/txt"  "/home/andy/data/img"
+    output :
+        ./dst_txt
+        ./dst_img
+    ```
