@@ -20,13 +20,21 @@
         ./val.txt
     ```
 - [showprocessbar.py](./showprocessbar.py) ： 显示处理进度脚本
-- [pick_all_xml_img.py](./pick_all_xml_img.py) ： 从同一个文件夹中挑选xml和image文件分别到相应文件夹中
+- [pick_xml_img_by_xml.py](./pick_xml_img_by_xml.py) ： 从同一个文件夹中挑选xml和image文件分别到相应文件夹中
+    ```python
+    input: 
+        python pick_all_xml_img.py "/home/andy/data/labels" "/home/andy/data/img" 
+    output:    
+        ./pickedLabel
+        ./pickedImg
+    ```
+- [pick_xml_img_by_img.py](./pick_xml_img_by_img.py) ： 根据图片文件夹将图片和标注文件挑选出来
     ```python
     input: 
         python pick_all_xml_img.py "/home/andy/data/img"
     output:    
         ./pickedLabel
-        ./pickedImg
+        ./
     ```
 - [pick_txt_img_by_label.py](./pick_txt_img_by_label.py) : 根据指定标签将txt和image文件挑出来
     ```python
