@@ -31,7 +31,7 @@ def pick(srcdir):
     if srcdir[-1] == "/":
         srcdir = srcdir[:-1]
 
-    # remake folder
+    # recreate folder
     if os.path.exists(pickedLabel_dir):
         shutil.rmtree(pickedLabel_dir)
     os.makedirs(pickedLabel_dir) 
@@ -65,6 +65,7 @@ def pick(srcdir):
     print("Path of picked images = ",os.path.abspath(pickedImg_dir))
 
 if __name__ == '__main__':
+    print("Pick images and xml by xml")
     args = parse_args()
     srcdir = args.srcdir
   
