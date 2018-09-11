@@ -17,6 +17,14 @@
         ./train.txt
         ./val.txt
     ```
+- [pick_img_by_list.py](./pick_img_by_list.py) ： 根据txt中的图像列表将图像和标签提取出来
+    ```python
+    input: 
+        python3 pick_img_by_list.py "/home/andy/data/val.txt" "/home/andy/data/labels" "/home/andy/data/img"
+    output: 
+        ./pickedLabel
+        ./pickedImg
+
 - [create_VOC_txt.py](./create_VOC_txt.py) ： 创建VOC-like的txt文件，其中Main文件夹下的只有文件名，当前文件夹下的是完整的目录
     ```python
     input: 
