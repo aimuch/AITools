@@ -7,7 +7,7 @@
     input: 
         python3 abspath2txt.py "/home/andy/Data/img"
     output: 
-        ./imgPath
+        ./imgPath.txt
     ```
 - [img2train.py](./img2train.py) ： 将图像分为训练和验证集，保存为train.txt和val.txt
     ```python

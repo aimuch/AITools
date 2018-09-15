@@ -5,7 +5,7 @@
 # This tool is used to convert image abs path into txt
 # input: python abspath2txt.py "/home/andy/Data/img"
 # output: 
-#	./imgPath
+#	./imgPath.txt
 
 
 import argparse
