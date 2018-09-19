@@ -68,7 +68,7 @@ def video2pic(video_dir, output_dir, interval, waitTime):
         pic_path = os.path.join(output_folder, pic_name)
 
         cv2.imwrite(pic_path, frame)
-        win = cv2.namedWindow('test win', flags=cv2.WINDOW_AUTOSIZE)
+        win = cv2.namedWindow('Clip Show', flags=cv2.WINDOW_AUTOSIZE)
         cv2.imshow('test win', frame)
         cv2.waitKey(waitTime)
       frame_num +=1
