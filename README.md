@@ -1,6 +1,15 @@
 # AI Tools
 - [formula.md](./formula.md) : AI相关公式
 - [grid.xlsx](./grid.xlsx) ：可打印的网络格子
+- [video2pic.py](./video2pic.py) ： 将视频切割为图像(h264、mkv视频格式，保存为png图像)
+  ```python
+    input: 
+        python video2pic.py \
+        /home/andy/data/train/video_folder \
+        /home/andy/data/train/output_folder
+    output: 
+        /home/andy/data/train/output_folder/video_folder/
+    ```
 - [copyfiles.py](./copyfiles.py) ： 文件/文件夹复制脚本
 - [abspath2txt.py](./abspath2txt.py) : 将文件夹中文件的绝对路径保存到txt中
     ```python
