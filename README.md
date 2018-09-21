@@ -13,7 +13,7 @@
 - [files2folders.py](./files2folders.py) ： 将图像/文件按照制定数量放到按照命名规则的文件夹中
   ```shell
     input: 
-        python files2folders.py /home/andy/data/image_folder /home/andy/data/result_folder
+        python files2folders.py /home/andy/data/image_folder ./result_folder
     output: 
         ./result_folder
     ```
@@ -24,6 +24,13 @@
         python3 abspath2txt.py "/home/andy/Data/img"
     output: 
         ./imgPath.txt
+    ```
+- [json2yolo.py](./json2yolo.py) ： 将json标注文件转换为yolo格式
+    ```shell
+    input: 
+        python3 json2yolo.py /home/andy/data/json_folder ./output_folder
+    output: 
+        ./output_folder
     ```
 - [img2train.py](./img2train.py) ： 将图像分为训练和验证集，保存为train.txt和val.txt
     ```shell
