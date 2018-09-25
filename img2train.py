@@ -33,7 +33,7 @@ def makelist(srcdir):
     val_file=open(val_path_txt,'w+')
 
     filelist = os.listdir(srcdir)
-    trainset = random.sample(filelist, int(len(filelist)*0.7))
+    trainset = random.sample(filelist, int(len(filelist)*0.8))
 
     for file in filelist:
         file_name,file_extend=os.path.splitext(file)
