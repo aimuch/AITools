@@ -107,7 +107,12 @@ def write2txt1(json_file_path, txt_f, cls, object_list, pic_size, type_list):
             
             # WanHong
             if attrs_type == "max_0":
-            	   continue
+                continue
+            # LongMao
+            if attrs_type == "min_5":
+                continue
+            if attrs_type == "min_7":
+                continue
              
             type_id = clr_id + classes[cls].index(attrs_type) 
             #print("type_id:", type_id)
@@ -181,8 +186,8 @@ if __name__ == '__main__':
   # output_dir = "/home/andy/Desktop/w"
 
   args = parse_args()
-    json_dir = args.json_dir
-    output_dir = args.output_dir
+  json_dir = args.json_dir
+  output_dir = args.output_dir
 
   if not os.path.exists(json_dir):
     print("Error !!! %s is not exists, please check the parameter")
