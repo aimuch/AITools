@@ -109,3 +109,11 @@
         ./dst_txt
         ./dst_img
     ```
+- [count_classes_by_txt.py](./count_classes_by_txt.py) : 通过txt标注文件统计每一类的数量
+    ```shell
+    input : 
+        python3 count_classes.py  /home/andy/data/txt_dir/
+    output :
+        ./classes_label_txt.txt
+        ./classes_index_txt.txt
+    ```
