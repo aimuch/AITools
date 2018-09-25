@@ -59,7 +59,7 @@ def convert_annotation(xml_dir, img_dir):
     print(img_dir)
     filelist = os.listdir(xml_dir)
 
-    trainnum = int(len(filelist)*0.7)
+    trainnum = int(len(filelist)*0.8)
     trainset = random.sample(filelist, trainnum)
 
     txt_dir = "./txt"
