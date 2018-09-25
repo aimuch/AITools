@@ -40,6 +40,8 @@
         ./train.txt
         ./val.txt
     ```
+- [img2train_with_check_img.py](./img2train_with_check_img.py) ： 检验图像并将图像分为训练和验证集，保存为train.txt和val.txt
+
 - [pick_img_by_list.py](./pick_img_by_list.py) ： 根据txt中的图像列表将图像和标签提取出来
     ```shell
     input: 
