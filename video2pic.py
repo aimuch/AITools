@@ -1,12 +1,12 @@
+# -*- coding: utf-8 -*-
 ### Author : zyy
 ### Modified by : Andy 
 ### Last modified : 2018-09-19
-
-### This tool is used to split videos into images
-### -----------EXAMPLE-------------------
-### python video2pic.py \
-###        /home/andy/data/train/video_1280X720 \
-###        /home/andy/data/train/output_folder
+### This tool is used to split videos into images(video_folders/video_folder/video.h264)
+### ----------------EXAMPLE-------------------
+###  python video2pic.py \
+###  		home/andy/data/train/video_folders \
+###			home/andy/data/train/output_folder --interval 5  --waitTime 5
 
 import os 
 import cv2 
@@ -35,27 +35,52 @@ def parse_args():
   return args
 
 def video2pic(video_dir, output_dir, interval, waitTime):
+  folder_info = os.path.split(video_dir)  # ['/home/andy/Desktop', 'dw_20180927_145333_0.000000_0.000000')]
   folder_name = os.path.basename(video_dir) 
 
   # Set the folder prefix
-  # if folder_name[:5] != carNO:
-  #   folder_name = carNO + folder_name
-  # if folder_name[-3:] != cameraNO:
-  #   folder_name = folder_name + cameraNO
+  if folder_name[:3] == "dw_":
+    folder_name = folder_name[3:]
+  #print(folder_name)
 
+  if folder_name[-18:] == "_0.000000_0.000000":
+    folder_name = folder_name[:-18]
+  #print(folder_name)
+
+  if folder_name[:5] != carNO:
+    folder_name = carNO + folder_name
+  #print(folder_name)
+
+  if folder_name[-3:] != cameraNO:
+    folder_name = folder_name + cameraNO
+
+  ## rename folder
+  folder_rename = os.path.join(folder_info[0], folder_name)
+  os.rename(video_dir, folder_rename)
   output_folder = os.path.join(output_dir, folder_name)
+  print(output_folder)
 
   if os.path.exists(output_folder):
     shutil.rmtree(output_folder)
   os.makedirs(output_folder)
- 
-  for video_file in os.listdir(video_dir):
+  
+  video_num = 0
+  for video_file in os.listdir(folder_rename):
     if video_file[-4:] != "h264" and video_file[-3:] != "mkv":
       continue
-    video_file_path = os.path.join(video_dir, video_file)
-    print("video file path : %s"%(video_file_path))
+    else:
+      video_num += 1
 
-    cap = cv2.VideoCapture(video_file_path)
+    ## raname videos 
+    video_info = os.path.splitext(video_file)
+    print(video_info)
+    video_rename = video_info[0] + "_" + str(video_num).zfill(2) + video_info[1]
+    video_file_path = os.path.join(folder_rename, video_file)
+    video_file_path_rename = os.path.join(folder_rename, video_rename)
+    os.rename(video_file_path, video_file_path_rename)
+    print("video file path : %s"%(video_file_path_rename))
+
+    cap = cv2.VideoCapture(video_file_path_rename)
     fps = cap.get(5)   # CV_CAP_PROP_FPS
     print("frame per second : %s \n interval : %s"%(fps, interval))
 
@@ -95,5 +120,7 @@ if __name__ == '__main__':
 
   if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-
-  video2pic(video_dir, output_dir, interval, waitTime)
+  
+  for folder in os.listdir(video_dir):
+    folder = os.path.join(video_dir, folder)
+    video2pic(folder, output_dir, interval, waitTime)

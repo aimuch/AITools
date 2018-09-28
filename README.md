@@ -1,11 +1,11 @@
 # AI Tools
 - [formula.md](./formula.md) : AI相关公式
 - [grid.xlsx](./grid.xlsx) ：可打印的网络格子
-- [video2pic.py](./video2pic.py) ： 将视频切割为图像(h264、mkv视频格式，保存为png图像)
+- [video2pic.py](./video2pic.py) ： 将视频切割为图像(h264、mkv视频格式，保存为png图像)，其中`video_folders/video/folder/video.h264`:
   ```shell
     input: 
         python video2pic.py \
-        /home/andy/data/train/video_folder \
+        /home/andy/data/train/video_folders \
         /home/andy/data/train/output_folder
     output: 
         /home/andy/data/train/output_folder/video_folder/
