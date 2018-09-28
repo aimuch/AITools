@@ -58,7 +58,7 @@ def video2pic(video_dir, output_dir, interval, waitTime):
   folder_rename = os.path.join(folder_info[0], folder_name)
   os.rename(video_dir, folder_rename)
   output_folder = os.path.join(output_dir, folder_name)
-  print(output_folder)
+  #print(output_folder)
 
   if os.path.exists(output_folder):
     shutil.rmtree(output_folder)
@@ -73,7 +73,7 @@ def video2pic(video_dir, output_dir, interval, waitTime):
 
     ## raname videos 
     video_info = os.path.splitext(video_file)
-    print(video_info)
+    #print(video_info)
     video_rename = video_info[0] + "_" + str(video_num).zfill(2) + video_info[1]
     video_file_path = os.path.join(folder_rename, video_file)
     video_file_path_rename = os.path.join(folder_rename, video_rename)
