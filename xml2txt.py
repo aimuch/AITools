@@ -17,6 +17,7 @@ import random
 import pickle
 import os
 import sys
+import cv2
 import argparse
 from os import listdir, getcwd
 from os.path import join
@@ -80,6 +81,13 @@ def convert_annotation(xml_dir, img_dir):
             imgfile = img_dir + "/" + fileInfor[0] + ".png"
         if not os.path.exists(imgfile):
             continue
+
+        # Check whether the image is complete
+        img = cv2.imread(imgfile)
+        if img is None:
+            print("%s can't read!"%imgfile)
+            continue
+
 
         if file in trainset:
             txt_train_list.write(imgfile + '\n')
