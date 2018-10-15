@@ -10,7 +10,6 @@
 #       ./txt
 #		./train.txt
 #		./val.txt
-#		./trianAll.txt
 
 import xml.etree.ElementTree as ET
 import random

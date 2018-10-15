@@ -100,7 +100,6 @@
         ./txt
         ./train.txt
         ./val.txt
-        ./trianAll.txt
     ```
 
 - [pick_non_empty_txt.py](./pick_non_empty_txt.py) : 提取text文件夹中非空的text文件
