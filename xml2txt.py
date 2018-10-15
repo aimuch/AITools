@@ -10,6 +10,7 @@
 #       ./txt
 #		./train.txt
 #		./val.txt
+#       ./trainAll.txt
 
 import xml.etree.ElementTree as ET
 import random
@@ -121,3 +122,4 @@ if __name__ == '__main__':
     convert_annotation(xml_dir, img_dir)
     print("Done!")
     os.system("cat train.txt val.txt > trainAll.txt")
+    print("Path of all train text =", os.path.abspath(txt_dir))

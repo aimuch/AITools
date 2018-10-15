@@ -49,7 +49,7 @@
     output: 
         ./pickedLabel
         ./pickedImg
-
+    ```
 - [create_VOC_txt.py](./create_VOC_txt.py) ： 创建VOC-like的txt文件，其中Main文件夹下的只有文件名，当前文件夹下的是完整的目录
     ```shell
     input: 
@@ -100,6 +100,7 @@
         ./txt
         ./train.txt
         ./val.txt
+        ./trainAll.txt
     ```
 
 - [pick_non_empty_txt.py](./pick_non_empty_txt.py) : 提取text文件夹中非空的text文件
