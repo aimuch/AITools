@@ -1,7 +1,7 @@
 # AI Tools
 - [formula.md](./formula.md) : AI相关公式
 - [grid.xlsx](./grid.xlsx) ：可打印的网络格子
-- [video2pic.py](./video2pic.py) ： 将视频切割为图像(h264、mkv视频格式，保存为png图像)，其中`video_folders/video/folder/video.h264`:
+- [video2pic.py](./video2pic.py) ： 将视频切割为图像(h264、mkv视频格式，保存为png图像)，其中`video_folders`的文件结构为`video_folders/video_folder/video.h264`，即`20181013_city/dw_20181013_132808_0.000000_0.000000/video_first.h264`
   ```shell
     input: 
         python video2pic.py \
@@ -25,10 +25,10 @@
     output: 
         ./imgPath.txt
     ```
-- [json2yolo.py](./json2yolo.py) ： 将json标注文件转换为yolo格式
+- [json2yolo.py](./json2yolo.py) ： 将json标注文件转换为yolo格式，其中`json_folders`的文件结构为`json_folders/json_folder/json`，即`json/072901/20180729_0001_500.json`
     ```shell
     input: 
-        python3 json2yolo.py /home/andy/data/json_folder ./output_folder
+        python3 json2yolo.py /home/andy/data/json_folders ./output_folder
     output: 
         ./output_folder
     ```

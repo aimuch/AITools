@@ -8,6 +8,11 @@
 ###  		home/andy/data/train/video_folders \
 ###			home/andy/data/train/output_folder --interval 5  --waitTime 5
 
+### -----------------NOTE---------------------
+### The tree of video_folders: video_folders/video_folder/video.h264 
+### Example:
+###         20181013_city/dw_20181013_132808_0.000000_0.000000/video_first.h264
+
 import os 
 import cv2 
 import sys

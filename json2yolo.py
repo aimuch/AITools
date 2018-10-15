@@ -5,7 +5,12 @@
 
 ### This tool is used to transform hryt.json to yolo txt formate 
 ### -----------EXAMPLE-------------------
-### python3 json2yolo.py /home/andy/data/json_folder /home/andy/data/output_folder
+### python3 json2yolo.py /home/andy/data/json_folders /home/andy/data/output_folder
+
+### -----------------NOTE---------------------
+### The tree of json_folders: json_folders/json_folder/json 
+### Example:
+###         json/072901/20180729_0001_500.json
 
 import os 
 import json
