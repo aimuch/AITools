@@ -13,6 +13,8 @@ import os,sys
 import random
 from os import listdir, getcwd
 from os.path import join
+import cv2
+from tqdm import tqdm
 
 
 def parse_args():
@@ -35,8 +37,14 @@ def makelist(srcdir):
     filelist = os.listdir(srcdir)
     trainset = random.sample(filelist, int(len(filelist)*0.8))
 
-    for file in filelist:
+    for file in tqdm(filelist):
         file_name,file_extend=os.path.splitext(file)
+
+        img_path = srcdir + "/" + file
+        img = cv2.imread(img_path)
+        if img is None:
+            print("%s can't read!"%file)
+            continue
 
         if file in trainset:
             train_file.write(srcdir+"/"+file+'\n')

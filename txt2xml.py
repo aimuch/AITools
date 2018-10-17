@@ -185,7 +185,7 @@ if __name__ == '__main__':
 
     xml_dir = "./xml"
     if not os.path.exists(xml_dir):
-        os.mkdir(xml_dir)
+        os.makedirs(xml_dir)
 
     if ann_dir[-1] == "/":
         ann_dir = ann_dir[:-1]
@@ -197,7 +197,7 @@ if __name__ == '__main__':
         temp = "./temp"
         # print(files)
         if not os.path.exists(temp):
-            os.mkdir(temp)
+            os.makedirs(temp)
         for file in files[2]:
             print(file + "-->start!")
             fileInfor = os.path.splitext(file)

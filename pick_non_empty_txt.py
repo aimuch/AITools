@@ -39,9 +39,9 @@ if __name__ == '__main__':
     dst_img = "./dst_img"
     dst_txt = "./dst_txt"
     if not os.path.exists(dst_img):
-        os.mkdir(dst_img)
+        os.makedirs(dst_img)
     if not os.path.exists(dst_txt):
-        os.mkdir(dst_txt)
+        os.makedirs(dst_txt)
 
     if ann_dir[-1] == "/":
         ann_dir = ann_dir[:-1]

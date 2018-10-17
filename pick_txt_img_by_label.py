@@ -38,9 +38,9 @@ def pick(txt_dir, img_dir):
         img_dir = img_dir[:-1]
 
     if not os.path.exists(dst_label):
-        os.mkdir(dst_label)
+        os.makedirs(dst_label)
     if not os.path.exists(dst_img):
-        os.mkdir(dst_img)
+        os.makedirs(dst_img)
 
 
     filelist = os.listdir(txt_dir)

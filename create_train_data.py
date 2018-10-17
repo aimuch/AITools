@@ -4,21 +4,18 @@
 # This tool is used to create data when the training samples are not balanced
 # input : python3 create_train_data.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
 # output:
-#	./new_img
-#   ./new_labels
-
+#	     ./new_img
+#        ./new_labels
 
 import os
 import os.path
 import shutil
 import sys
 import argparse
-import opencv2
-from PIL import Image
+import cv2
 
-
-## Parsing input command syntax
 def parse_args():
+    """Parsing input command syntax"""
     parser = argparse.ArgumentParser()
     parser.add_argument('ann_dir', help='Annotations directory', type=str)
     parser.add_argument('img_dir', help='Images directory', type=str)
@@ -28,65 +25,8 @@ def parse_args():
  
 wait4AddLabels = [1,2]
 
-def createData(ann_dir_src, img_dir_src, ann_dir_dst, img_dir_dst):
-    
-    foldename = os.path.dirname(ann_dir_src).split("/")[-1]
-    folder_txt = doc.createTextNode(foldename)
-    folder.appendChild(folder_txt)
- 
-    filename = doc.createElement('filename')
-    annotation.appendChild(filename)
-    imgInfor = os.path.basename(imgname).split(".")
-    filename_txt = doc.createTextNode(imgInfor[0])
-    filename.appendChild(filename_txt)
-
-    pathname = doc.createElement('path')
-    annotation.appendChild(pathname)
-    pathname_txt = doc.createTextNode(imgname)
-    pathname.appendChild(pathname_txt)
-
-    #ones#
-    source = doc.createElement('source')
-    annotation.appendChild(source)
- 
-    database = doc.createElement('database')
-    source.appendChild(database)
-    database_txt = doc.createTextNode("VOC2007 Database")
-    database.appendChild(database_txt)
- 
-    # annotation_new = doc.createElement('annotation')
-    # source.appendChild(annotation_new)
-    # annotation_new_txt = doc.createTextNode("PASCAL VOC2007")
-    # annotation_new.appendChild(annotation_new_txt)
- 
-    image = doc.createElement('image')
-    source.appendChild(image)
-    image_txt = doc.createTextNode(os.path.basename(imgname).split(".")[0])
-    image.appendChild(image_txt)
-    #onee#
-    #twos#
-    size = doc.createElement('size')
-    annotation.appendChild(size)
- 
-    width = doc.createElement('width')
-    size.appendChild(width)
-    width_txt = doc.createTextNode(str(w))
-    width.appendChild(width_txt)
- 
-    height = doc.createElement('height')
-    size.appendChild(height)
-    height_txt = doc.createTextNode(str(h))
-    height.appendChild(height_txt)
- 
-    depth = doc.createElement('depth')
-    size.appendChild(depth)
-    depth_txt = doc.createTextNode("3")
-    depth.appendChild(depth_txt)
-    #twoe#
-    segmented = doc.createElement('segmented')
-    annotation.appendChild(segmented)
-    segmented_txt = doc.createTextNode("0")
-    segmented.appendChild(segmented_txt)
+def createData(ann_dir_src, img_dir_src, ann_dir_dst, img_dir_dst, labels):
+    """Create training data by exiting labels"""
 
     size = [w,h]
 
@@ -163,23 +103,27 @@ def createData(ann_dir_src, img_dir_src, ann_dir_dst, img_dir_dst):
 
 if __name__ == '__main__':
     args = parse_args()
-    ann_dir = args.ann_dir
-    img_dir = args.img_dir
-    if not os.path.exists(ann_dir):
-        print("Error !!! %s is not exists, please check the parameter"%ann_dir)
+    ann_dir_src = args.ann_dir_src
+    img_dir_src = args.img_dir_src
+    if not os.path.exists(ann_dir_src):
+        print("Error !!! %s is not exists, please check the parameter"%ann_dir_src)
         sys.exit(0)
-    if not os.path.exists(img_dir):
-        print("Error !!! %s is not exists, please check the parameter"%img_dir)
+    if not os.path.exists(img_dir_src):
+        print("Error !!! %s is not exists, please check the parameter"%img_dir_src)
         sys.exit(0)
 
-    xml_dir = "./xml"
-    if not os.path.exists(xml_dir):
-        os.mkdir(xml_dir)
-
-    if ann_dir[-1] == "/":
-        ann_dir = ann_dir[:-1]
-    if img_dir[-1] == "/":
-        img_dir = img_dir[:-1]
+    ## Output folders
+    ann_dir_dst = "./new_labels"
+    img_dir_dst = "./new_img"
+    if not os.path.exists(ann_dir_dst):
+        os.mkdir(ann_dir_dst)
+    if not os.path.exists(img_dir_dst):
+        os.mkdir(img_dir_dst)
+    ## Check
+    if ann_dir_dst[-1] == "/":
+        ann_dir_dst = ann_dir_dst[:-1]
+    if img_dir_dst[-1] == "/":
+        img_dir_dst = img_dir_dst[:-1]
     
 
     for files in os.walk(ann_dir): # os.walk return (root,dirs,files)
@@ -197,10 +141,7 @@ if __name__ == '__main__':
             	imgpath = img_dir + "/" + img_name
             if not os.path.exists(imgpath):
             	continue
-            im=Image.open(imgpath)  
-            width= int(im.size[0])
-            height= int(im.size[1])
-            im.close()
+           
             
             filelabel = open(ann_dir + "/" + file, "r")
             lines = filelabel.read().split('\n')[:-1]
