@@ -118,7 +118,8 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             ## Check ROI
             #cv2.rectangle(img, (left, top), (left+roi_width_new, top+roi_height_new), (0,255,0), 2)
             img[top:top+roi_height_new, left:left+roi_width_new] = roi_img_new
-            img_path_dst = img_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(i) + ".jpg"
+            name_tail = i + random.randint(0,99)//random.randint(1,9) # avoid the same image 
+            img_path_dst = img_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(name_tail) + ".jpg"
             cv2.imwrite(img_path_dst, img)
             cv2.waitKey(5)
             
@@ -128,12 +129,12 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             lines_src = label_src.read().split('\n')[:-1]
             box = (float(left), float(left+roi_width_new), float(top), float(top+roi_height_new))
             bb = convert((width, height), box)
-            objs = [str(label) + ' ' + ' '.join([str(i) for i in bb])]
+            objs = [str(label) + ' ' + ' '.join([str(j) for j in bb])]
             for line in lines_src:
                 objs.append(line)
             label_src.close()
 
-            label_dst_path = ann_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(i) + ".txt"
+            label_dst_path = ann_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(name_tail) + ".txt"
             label_dst = open(label_dst_path, 'w')
             for obj in objs:
             	label_dst.write(obj + '\n')
