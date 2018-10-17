@@ -18,6 +18,19 @@
         ./result_folder
     ```
 - [copyfiles.py](./copyfiles.py) ： 文件/文件夹复制脚本
+- [pick_ROI.py](./pick_ROI.py) ： 提取标注好的ROI区域
+  ```shell
+  input : python3 pick_ROI.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+  output:
+	     ./ROIs/
+  ```
+- [create_train_data.py](./create_train_data.py) ： 训练数据加强
+  ```shell
+  input : python3 create_train_data.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+  output:  
+        ./new_img
+        ./new_label
+  ```
 - [abspath2txt.py](./abspath2txt.py) : 将文件夹中文件的绝对路径保存到txt中
     ```shell
     input: 

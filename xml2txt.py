@@ -24,7 +24,7 @@ from os.path import join
 
 #sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
 
-classes = ["7","8"] #顺序要跟voc.names顺序一致
+classes = ["0","3","5"] #顺序要跟voc.names顺序一致
 #classes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"]
 #classes = ["person","rider","motor","car","bus","truck","ts","tl_g","tl_r","tl_y","tl_n","50","60","30","20","40","80","15","5"]#顺序要跟voc.names顺序一致
 
@@ -130,4 +130,4 @@ if __name__ == '__main__':
     convert_annotation(xml_dir, img_dir)
     print("Done!")
     os.system("cat train.txt val.txt > trainAll.txt")
-    print("Path of all train text =", os.path.abspath(txt_dir))
+    print("Path of all train text =", os.path.abspath("./trainAll.txt"))

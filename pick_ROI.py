@@ -39,8 +39,10 @@ def convert(imsize, x,y,w,h):
 def createData(ann_dir, img_dir, picklabels):
     """Create training data by exiting labels"""
     
+    ## Change to abs path
     ann_dir = os.path.abspath(ann_dir)
     img_dir = os.path.abspath(img_dir)
+
     ## Remove "/" from the last path
     if ann_dir[-1] == "/":
         ann_dir = ann_dir[:-1]
