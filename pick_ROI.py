@@ -14,7 +14,7 @@ import argparse
 import cv2
 from tqdm import tqdm
 
-picklabels = [1,2,3,4,5,6,7,8,9,10]
+picklabels = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
 
 picklabels = [ str(i) for i in picklabels ]
 objdict = {}
@@ -96,6 +96,7 @@ def createData(ann_dir, img_dir, picklabels):
                     os.makedirs(imgfolder)
                 else:
                     objdict[obj] += 1
+                    imgfolder = output_dir + "/" + obj
                 
                 imgpath = imgfolder + "/" + str(objdict[obj]) + ".jpg"
                 cv2.imwrite(imgpath, roi_img)
