@@ -116,7 +116,7 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             top = random.randint(int(height*0.1), int(height*0.9)-roi_height_new)
             left = random.randint(int(width*0.1), int(width*0.9)-roi_width_new)
             ## Check ROI
-            cv2.rectangle(img, (left, top), (left+roi_width_new, top+roi_height_new), (0,255,0), 2)
+            #cv2.rectangle(img, (left, top), (left+roi_width_new, top+roi_height_new), (0,255,0), 2)
             img[top:top+roi_height_new, left:left+roi_width_new] = roi_img_new
             img_path_dst = img_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(i) + ".jpg"
             cv2.imwrite(img_path_dst, img)
