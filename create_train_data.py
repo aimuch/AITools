@@ -2,7 +2,7 @@
 # Author : Andy Liu
 # Last modified: 2018-10-16
 # This tool is used to create data when the training samples are not balanced
-# input : python3 create_train_data.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+# input : python3 create_train_data.py /home/andy/data/ann_dir /home/andy/data/img_dir /home/andy/data/ROIs --num 1000
 # output:
 #	     ./new_img
 #        ./new_labels

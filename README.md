@@ -20,13 +20,13 @@
 - [copyfiles.py](./copyfiles.py) ： 文件/文件夹复制脚本
 - [pick_ROI.py](./pick_ROI.py) ： 提取标注好的ROI区域
   ```shell
-  input : python3 pick_ROI.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+  input : python3 pick_ROI.py  "/home/andy/data/ann_dir"  "/home/andy/data/img_dir"
   output:
 	     ./ROIs/
   ```
-- [create_train_data.py](./create_train_data.py) ： 训练数据加强
+- [create_train_data.py](./create_train_data.py) ： 训练数据加强，其中`ROIs`文件夹下保存的是`pick_ROI.py`程序执行后比较理想的结果
   ```shell
-  input : python3 create_train_data.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+  input : python3 create_train_data.py /home/andy/data/ann_dir /home/andy/data/img_dir /home/andy/data/ROIs --num 1000
   output:  
         ./new_img
         ./new_label
