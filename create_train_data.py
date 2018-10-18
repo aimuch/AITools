@@ -103,7 +103,7 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
 
             ## Data Augment
             scale = random.uniform(scales[0], scales[1])
-            newSize = (int(roi_height*scale), int(roi_width*scale)) 
+            newSize = (int(roi_width*scale), int(roi_height*scale)) 
             roi_img_new = cv2.resize(roi_img, newSize)
             #cv2.imwrite("./roi.jpg", roi_img_new)
             
