@@ -15,6 +15,7 @@ import argparse
 import random
 import cv2
 from tqdm import tqdm
+import numpy as np
 
 wait4AddLabels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 scales = [0.7, 1.7]
@@ -40,6 +41,16 @@ def rotate(image, angle, center=None, scale=1.0):
     rotated = cv2.warpAffine(image, M, (w, h))
     return rotated
 
+def addGaussianNoise(image, percetage): 
+    G_Noiseimg = image.copy()
+    w = image.shape[1]
+    h = image.shape[0]
+    G_NoiseNum=int(percetage*image.shape[0]*image.shape[1]) 
+    for i in range(G_NoiseNum): 
+        temp_x = np.random.randint(0,h) 
+        temp_y = np.random.randint(0,w) 
+        G_Noiseimg[temp_x][temp_y][np.random.randint(3)] = np.random.randn(1)[0] 
+    return G_Noiseimg
 
 def convert(imgsize, box):
     dw = 1./(imgsize[0])
@@ -106,11 +117,15 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             newSize = (int(roi_width*scale), int(roi_height*scale)) 
             roi_img_new = cv2.resize(roi_img, newSize)
             #cv2.imwrite("./roi.jpg", roi_img_new)
+            process_id = random.randint(0, 1)
+            if process_id == 0:
+            	roi_img_new = addGaussianNoise(roi_img_new, random.random()*0.3)
             
             roi_height_new, roi_width_new, roi_channel = roi_img_new.shape
             img_name = random.choice(img_list)
             img_path = img_dir_src + "/" + img_name
-            img = cv2.imread(img_path)
+            img_src = cv2.imread(img_path)
+            img = img_src.copy()
             height, width, channel = img.shape
             top = random.randint(int(height*0.1), int(height*0.9)-roi_height_new)
             left = random.randint(int(width*0.1), int(width*0.9)-roi_width_new)
