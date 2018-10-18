@@ -117,9 +117,9 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             newSize = (int(roi_width*scale), int(roi_height*scale)) 
             roi_img_new = cv2.resize(roi_img, newSize)
             #cv2.imwrite("./roi.jpg", roi_img_new)
-            process_id = random.randint(0, 1)
+            process_id = random.randint(0, 4) # 1/4 probability
             if process_id == 0:
-            	roi_img_new = addGaussianNoise(roi_img_new, random.random()*0.3)
+            	roi_img_new = addGaussianNoise(roi_img_new, random.random()*0.2)
             
             roi_height_new, roi_width_new, roi_channel = roi_img_new.shape
             img_name = random.choice(img_list)
