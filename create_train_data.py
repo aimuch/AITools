@@ -16,8 +16,8 @@ import random
 import cv2
 from tqdm import tqdm
 
-wait4AddLabels = [0]
-scales = [0.6, 1.8]
+wait4AddLabels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+scales = [0.7, 1.7]
 
 
 def parse_args():
@@ -102,9 +102,8 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             roi_height, roi_width, roi_channel = roi_img.shape
 
             ## Data Augment
-            scale_w = random.uniform(scales[0], scales[1])
-            scale_h = random.uniform(scales[0], scales[1])
-            newSize = (int(roi_height*scale_h), int(roi_width*scale_w)) 
+            scale = random.uniform(scales[0], scales[1])
+            newSize = (int(roi_height*scale), int(roi_width*scale)) 
             roi_img_new = cv2.resize(roi_img, newSize)
             #cv2.imwrite("./roi.jpg", roi_img_new)
             
