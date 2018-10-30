@@ -17,7 +17,12 @@
     output: 
         ./result_folder
     ```
-- [copyfiles.py](./copyfiles.py) ： 文件/文件夹复制脚本
+- [drawbox.py](./drawbox.py) ： 将label绘制在图中并存储在指定文件夹       
+  ```shell
+  input : python drawbdd.py  /home/data/json /home/data/img /home/data/output_draw
+  output:
+	     /home/data/output_draw
+  ```
 - [pick_ROI.py](./pick_ROI.py) ： 提取标注好的ROI区域
   ```shell
   input : python3 pick_ROI.py  "/home/andy/data/ann_dir"  "/home/andy/data/img_dir"
