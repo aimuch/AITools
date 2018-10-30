@@ -21,6 +21,7 @@ import cv2
 import argparse
 from os import listdir, getcwd
 from os.path import join
+from tqdm import tqdm
 
 #sets=[('2012', 'train'), ('2012', 'val'), ('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
 
