@@ -116,7 +116,7 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             scale = random.uniform(scales[0], scales[1])
             newSize = (int(roi_width*scale), int(roi_height*scale)) 
             roi_img_new = cv2.resize(roi_img, newSize)
-            #cv2.imwrite("./roi.jpg", roi_img_new)
+            #cv2.imwrite("./roi.png", roi_img_new)
             process_id = random.randint(0, 4) # 1/4 probability
             if process_id == 0:
             	roi_img_new = addGaussianNoise(roi_img_new, random.random()*0.2)
@@ -133,7 +133,7 @@ def createData(ann_dir_src, img_dir_src, ROIs_dir, wait4AddLabels, num, scales):
             #cv2.rectangle(img, (left, top), (left+roi_width_new, top+roi_height_new), (0,255,0), 2)
             img[top:top+roi_height_new, left:left+roi_width_new] = roi_img_new
             name_tail = i + random.randint(0,99)//random.randint(1,9) # avoid the same image 
-            img_path_dst = img_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(name_tail) + ".jpg"
+            img_path_dst = img_folder_dst + "/" + img_name.split(".")[-2] + "_" + str(name_tail) + ".png"
             cv2.imwrite(img_path_dst, img)
             cv2.waitKey(5)
             
