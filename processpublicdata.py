@@ -17,6 +17,7 @@ from tqdm import tqdm
 
 classes = {}
 colors = [(0,0,255),(0,255,0),(255,0,0),(0,255,255)]
+img_error = []
 
 def parse_args():
     '''Parsing command line arguments'''
@@ -76,7 +77,7 @@ def process(txt_dir, img_dir, drawout, ROIs):
         for line in tqdm(lines):
             line = line.split(';') # split by ';'
             img_name = line[0] # with extend
-            box = (int(line[1]), int(line[2]), int(line[3]), int(line[4]))
+            box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4])))
             label = line[-1]
             if label not in classes:
                 classes[label] = 1
@@ -84,10 +85,15 @@ def process(txt_dir, img_dir, drawout, ROIs):
                 classes[label] += 1
             imgname = img_name.split('.')[0]
             img = cv2.imread(img_dir + '/' + img_name)
+            if img is None:
+                # print("%s can't read!"%(img_dir + '/' + img_name))
+                img_error.append(img_dir + '/' + img_name)
+                continue
             roi = img[box[1]:box[3], box[0]:box[2]]
             cv2.imwrite(ROIs + '/' + imgname + '_' + str(random.randint(0,99)//random.randint(1,9)) + '.png', roi)
             img_draw = draw_img(img, box, colors[0], label)
             cv2.imwrite(drawout + '/' + img_name, img_draw)
+        
         return
     elif os.path.isdir(txt_dir):
         txt_list = os.listdir(txt_dir)
@@ -122,11 +128,11 @@ if __name__ == '__main__':
     ROIs = args.ROIs
 
     if not os.path.exists(txt_dir):
-        print("Error !!! %s is not exists, please check the parameter")
+        print("Error !!! %s is not exists, please check the parameter"%txt_dir)
         sys.exit(0)
 
     if not os.path.exists(img_dir):
-        print("Error !!! %s is not exists, please check the parameter")
+        print("Error !!! %s is not exists, please check the parameter"%img_dir)
         sys.exit(0)
 
     if not os.path.exists(drawout):
@@ -138,3 +144,6 @@ if __name__ == '__main__':
         print("Output folder = ", os.path.abspath(ROIs))
 
     process(txt_dir, img_dir, drawout, ROIs)
+    print("The damaged images : %d"%len(img_error))
+    for e in img_error:
+        print(img_error)
