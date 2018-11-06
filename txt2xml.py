@@ -160,7 +160,8 @@ def writeXml(tmp, imgname, w, h, objs, wxml):
         
     rewrite = open(tempfile, "r")
     lines = rewrite.read().split('\n')
-    newlines = lines[1:len(lines)-1]
+    newlines = lines[1:len(lines)-1] # ['<?xml version="1.0" ?>', '<annotation>', '</annotation>', '']
+
     
     fw = open(wxml, "w")
     for i in range(0, len(newlines)):
@@ -214,7 +215,7 @@ if __name__ == '__main__':
             im.close()
             
             filelabel = open(ann_dir + "/" + file, "r")
-            lines = filelabel.read().split('\n')[:-1]
+            lines = filelabel.read().split('\n')[:-1] # # ['0 0.6 0.7 0.04 0.06', '3 0.5 0.6 0.01 0.01', ''] -> ['0 0.6 0.7 0.04 0.06', '3 0.5 0.6 0.01 0.01']
             objs = []
             for line in lines:
                 obj = line.split(" ")
