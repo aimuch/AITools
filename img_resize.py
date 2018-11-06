@@ -51,7 +51,7 @@ if __name__ == '__main__':
     img_dst = args.img_dst
 
     if not os.path.exists(img_src):
-        print("Error !!! %s is not exists, please check the parameter")
+        print("Error !!! %s is not exists, please check the parameter"%img_src)
         sys.exit(0)
 
     if not os.path.exists(img_dst):

@@ -76,18 +76,27 @@ def process(txt_dir, img_dir, drawout, ROIs):
         lines = parse(txt_dir)
         for line in tqdm(lines):
             line = line.split(';') # split by ';'
+            if line[-1] == '':
+                line.pop()
+            if len(line) != 6:
+                continue
             img_name = line[0] # with extend
             box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4])))
-            label = line[-1]
+            # print(box)
+            label = line[5]
             if label not in classes:
                 classes[label] = 1
             else:
                 classes[label] += 1
             imgname = img_name.split('.')[0]
-            img = cv2.imread(img_dir + '/' + img_name)
+            # print(img_name)
+            imgpath = img_dir + '/' + img_name
+            if not os.path.exists(imgpath):
+                continue
+            img = cv2.imread(imgpath)
             if img is None:
                 # print("%s can't read!"%(img_dir + '/' + img_name))
-                img_error.append(img_dir + '/' + img_name)
+                img_error.append(imgpath)
                 continue
             roi = img[box[1]:box[3], box[0]:box[2]]
             cv2.imwrite(ROIs + '/' + imgname + '_' + str(random.randint(0,99)//random.randint(1,9)) + '.png', roi)
@@ -97,19 +106,31 @@ def process(txt_dir, img_dir, drawout, ROIs):
         return
     elif os.path.isdir(txt_dir):
         txt_list = os.listdir(txt_dir)
-        for txt in tqdm(txt_list):
+        for txt in txt_list:
             lines = parse(txt_dir)
-            for line in lines:
+            for line in tqd,(lines):
                 line = line.split(';') # split by ';'
+                if line[-1] == '':
+                    line.pop()
+                if len(line) != 6:
+                    continue
                 img_name = line[0] # with extend
-                box = (line[1], line[2], line[3], line[4])
-                label = line[-1]
+                # print(img_name)
+                box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4])))
+                label = line[5]
                 if label not in classes:
                     classes[label] = 1
                 else:
                     classes[label] += 1
                 imgname = img_name.split('.')[0]
-                img = cv.imread(img_dir + '/' + img_name)
+                imgpath = img_dir + '/' + img_name
+                if not os.path.exists(imgpath):
+                    continue
+                img = cv.imread(imgpath)
+                if img is None:
+                    # print("%s can't read!"%(img_dir + '/' + img_name))
+                    img_error.append(imgpath)
+                    continue
                 roi = img[box[1]:box[3], box[0]:box[2]]
                 cv2.imwrite(ROIs + '/' + imgname + '_' + random.randint(0,99)//random.randint(1,9) + '.png', roi)
                 img_draw = draw_img(img, box, colors[0], label)

@@ -120,11 +120,11 @@ if __name__ == '__main__':
   output_dir = args.output_dir
 
   if not os.path.exists(json_dir):
-    print("Error !!! %s is not exists, please check the parameter")
+    print("Error !!! %s is not exists, please check the parameter"%json_dir)
     sys.exit(0)
 
   if not os.path.exists(img_dir):
-    print("Error !!! %s is not exists, please check the parameter")
+    print("Error !!! %s is not exists, please check the parameter"%img_dir)
     sys.exit(0)
 
   if not os.path.exists(output_dir):

@@ -62,7 +62,7 @@ if __name__ == '__main__':
     srcdir = args.srcdir
   
     if not os.path.exists(srcdir):
-        print("Error !!! %s is not exists, please check the parameter")
+        print("Error !!! %s is not exists, please check the parameter"%srcdir)
         sys.exit(0)
 
     makelist(srcdir)
