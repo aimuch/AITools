@@ -1,6 +1,10 @@
 # AI Tools
 - [formula.md](./formula.md) : AI相关公式
 - [grid.xlsx](./grid.xlsx) ：可打印的网络格子
+- [img_resize.py](./img_resize.py) ：图像缩放(注意`Annotations`为二级文件夹，即里面还有一层文件夹)       
+    ```shell
+    python img_resize.py /home/data/Annotations /home/data/JPEGImages /home/data/output_draw
+    ```
 - [video2pic.py](./video2pic.py) ： 将视频切割为图像(h264、mkv视频格式，保存为png图像)，其中`video_folders`的文件结构为`video_folders/video_folder/video.h264`，即`20181013_city/dw_20181013_132808_0.000000_0.000000/video_first.h264`
   ```shell
     input: 
@@ -17,7 +21,7 @@
     output: 
         ./result_folder
     ```
-- [drawbox.py](./drawbox.py) ： 将label绘制在图中并存储在指定文件夹       
+- [drawbox.py](./drawbox.py) ： 将label绘制在图中并存储在指定文件夹(注意`json`为二级文件夹，即里面还有一层文件夹)      
   ```shell
   input : python drawbdd.py  /home/data/json /home/data/img /home/data/output_draw
   output:
