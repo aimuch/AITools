@@ -100,7 +100,7 @@ def createData(ann_dir, img_dir, picklabels):
                     objdict[obj] += 1
                     imgfolder = output_dir + "/" + obj
                 
-                imgpath = imgfolder + "/" + str(objdict[obj]) + ".jpg"
+                imgpath = imgfolder + "/" + str(objdict[obj]) + ".png"
                 cv2.imwrite(imgpath, roi_img)
 
         labelfile.close()

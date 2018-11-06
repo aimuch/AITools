@@ -33,6 +33,13 @@
   output:
 	     ./ROIs/
   ```
+- [pick_ROI.py](./processpublicdata.py) ： 处理公共数据集数据(提取ROI区域、绘制外界边框)
+  ```shell
+  input : python processpublicdata.py /home/andy/data/txt /home/andy/data/img  /drawout /ROIs
+  output:
+	    ./drawout
+        ./ROIs
+  ```
 - [create_train_data.py](./create_train_data.py) ： 训练数据加强，其中`ROIs`文件夹下保存的是`pick_ROI.py`程序执行后比较理想的结果
   ```shell
   input : python3 create_train_data.py /home/andy/data/ann_dir /home/andy/data/img_dir /home/andy/data/ROIs --num 1000
