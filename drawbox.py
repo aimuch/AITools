@@ -49,7 +49,7 @@ def draw_attrs_box(img, cls, object_list):
         #print("id_dict:%s"%id_dict)
         if "attrs" in id_dict:
             #print("attrs:%s\n"%id_dict["attrs"])
-            dict_attrs = id_dict["attrs"]["ignore"][0] 
+            dict_attrs = id_dict["attrs"]["ignore"][0] # dict_attrs = ignore_type_occlusion_led_color_direction
             
             if id_dict["attrs"].has_key("type") and id_dict["attrs"]["type"] :
                dict_attrs += "_" + id_dict["attrs"]["type"]
