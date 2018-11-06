@@ -81,7 +81,7 @@ def process(txt_dir, img_dir, drawout, ROIs):
             if len(line) != 6:
                 continue
             img_name = line[0] # with extend
-            box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4])))
+            box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4]))) # col_top, row_top, col_bottom, row_bottom
             # print(box)
             label = line[5]
             if label not in classes:
@@ -166,5 +166,4 @@ if __name__ == '__main__':
 
     process(txt_dir, img_dir, drawout, ROIs)
     print("The damaged images : %d"%len(img_error))
-    for e in img_error:
-        print(img_error)
+    print(img_error)
