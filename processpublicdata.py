@@ -11,12 +11,13 @@
 import os
 import sys
 import random
+import shutil
 import argparse
 import cv2
 from tqdm import tqdm
 
 classes = {}
-colors = [(0,0,255),(0,255,0),(255,0,0),(0,255,255)]
+colors = [(0,10,255),(0,255,0),(255,0,0),(0,255,255)]
 img_error = []
 
 def parse_args():
@@ -78,12 +79,21 @@ def process(txt_dir, img_dir, drawout, ROIs):
             line = line.split(';') # split by ';'
             if line[-1] == '':
                 line.pop()
-            if len(line) != 6:
+            elif line[-1] == '\r':
+                line.pop()
+
+            if len(line) == 6:
+                img_name = line[0] # with extend
+                box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4]))) # col_top, row_top, col_bottom, row_bottom
+                # print(box)
+                label = line[5]
+            elif len(line) == 8:
+                img_name = line[0] # with extend
+                box = (int(float(line[3])), int(float(line[4])), int(float(line[5])), int(float(line[6]))) # col_top, row_top, col_bottom, row_bottom
+                # print(box)
+                label = line[7]
+            else:
                 continue
-            img_name = line[0] # with extend
-            box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4]))) # col_top, row_top, col_bottom, row_bottom
-            # print(box)
-            label = line[5]
             if label not in classes:
                 classes[label] = 1
             else:
@@ -112,12 +122,20 @@ def process(txt_dir, img_dir, drawout, ROIs):
                 line = line.split(';') # split by ';'
                 if line[-1] == '':
                     line.pop()
-                if len(line) != 6:
+                elif line[-1] == '\r':
+                    line.pop()
+                if len(line) == 6:
+                    img_name = line[0] # with extend
+                    box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4]))) # col_top, row_top, col_bottom, row_bottom
+                    # print(box)
+                    label = line[5]
+                elif len(line) == 8:
+                    img_name = line[0] # with extend
+                    box = (int(float(line[3])), int(float(line[4])), int(float(line[5])), int(float(line[6]))) # col_top, row_top, col_bottom, row_bottom
+                    # print(box)
+                    label = line[7]
+                else:
                     continue
-                img_name = line[0] # with extend
-                # print(img_name)
-                box = (int(float(line[1])), int(float(line[2])), int(float(line[3])), int(float(line[4])))
-                label = line[5]
                 if label not in classes:
                     classes[label] = 1
                 else:
@@ -159,8 +177,16 @@ if __name__ == '__main__':
     if not os.path.exists(drawout):
         os.makedirs(drawout)
         print("Output folder = ", os.path.abspath(drawout))
+    else:
+        shutil.rmtree(drawout)
+        os.makedirs(drawout)
+        print("Output folder = ", os.path.abspath(drawout))
 
     if not os.path.exists(ROIs):
+        os.makedirs(ROIs)
+        print("Output folder = ", os.path.abspath(ROIs))
+    else:
+        shutil.rmtree(ROIs)
         os.makedirs(ROIs)
         print("Output folder = ", os.path.abspath(ROIs))
 
