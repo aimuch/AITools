@@ -148,3 +148,7 @@
         ./classes_label_txt.txt
         ./classes_index_txt.txt
     ```
+- Caffe数据预处理
+  - [creat_caffe_filelist.sh](./caffe/creat_caffe_filelist.sh)
+  - [creat_caffe_lmdb.sh](./caffe/creat_caffe_lmdb.sh)
+  - [make_myself_mean.sh](./caffe/make_myself_mean.sh)
