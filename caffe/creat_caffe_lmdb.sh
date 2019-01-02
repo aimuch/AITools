@@ -9,6 +9,7 @@ TOOLS=/home/andy/caffe/build/tools
 
 TRAIN_DATA_ROOT=/home/andy/caffe/examples/mydata/apa_slot/data/train/
 VAL_DATA_ROOT=/home/andy/caffe/examples/mydata/apa_slot/data/val/
+TEST_DATA_ROOT=/home/andy/caffe/examples/mydata/apa_slot/data/test/
 
 RESIZE=true
 if $RESIZE; then
@@ -19,7 +20,7 @@ else
   RESIZE_WIDTH=0
 fi
 
-echo "Creating train lmdb..."
+echo ">>>>>> Creating train lmdb... >>>>>>"
 rm -rf $EXAMPLE/mydata_train_lmdb
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
@@ -30,7 +31,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     $DATA/train.txt \
     $EXAMPLE/mydata_train_lmdb
 
-echo "Creating val lmdb..."
+echo ">>>>>> Creating val lmdb... >>>>>>"
 rm -rf $EXAMPLE/mydata_val_lmdb
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --resize_height=$RESIZE_HEIGHT \
@@ -40,5 +41,16 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     $VAL_DATA_ROOT \
     $DATA/val.txt \
     $EXAMPLE/mydata_val_lmdb
+
+echo ">>>>>> Creating test lmdb... >>>>>>"
+rm -rf $EXAMPLE/mydata_test_lmdb
+GLOG_logtostderr=1 $TOOLS/convert_imageset \
+    --resize_height=$RESIZE_HEIGHT \
+    --resize_width=$RESIZE_WIDTH \
+    --shuffle \
+    --gray \
+    $TEST_DATA_ROOT \
+    $DATA/test.txt \
+    $EXAMPLE/mydata_test_lmdb
 
 echo "Done."
