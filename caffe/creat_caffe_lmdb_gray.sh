@@ -13,8 +13,8 @@ TEST_DATA_ROOT=/home/andy/caffe/examples/mydata/apa_slot/data/test/
 
 RESIZE=true
 if $RESIZE; then
-  RESIZE_HEIGHT=48
-  RESIZE_WIDTH=192
+  RESIZE_HEIGHT=128
+  RESIZE_WIDTH=128
 else
   RESIZE_HEIGHT=0
   RESIZE_WIDTH=0
