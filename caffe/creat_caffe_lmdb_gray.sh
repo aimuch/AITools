@@ -31,6 +31,8 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     $DATA/train.txt \
     $EXAMPLE/mydata_train_lmdb
 
+echo "\n"
+
 echo ">>>>>> Creating val lmdb... >>>>>>"
 rm -rf $EXAMPLE/mydata_val_lmdb
 GLOG_logtostderr=1 $TOOLS/convert_imageset \
@@ -41,6 +43,8 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     $VAL_DATA_ROOT \
     $DATA/val.txt \
     $EXAMPLE/mydata_val_lmdb
+
+echo "\n"
 
 echo ">>>>>> Creating test lmdb... >>>>>>"
 rm -rf $EXAMPLE/mydata_test_lmdb
@@ -53,4 +57,6 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     $DATA/test.txt \
     $EXAMPLE/mydata_test_lmdb
 
-echo "Done."
+echo "\n"
+
+echo "All done!"
