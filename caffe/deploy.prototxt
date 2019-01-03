@@ -53,7 +53,7 @@ layer {
   }
   convolution_param {
     num_output: 40
-    kernel_size = 5
+    kernel_size: 5
     weight_filler {
       type: "msra"
     }
@@ -190,7 +190,7 @@ layer {
     pad: 1
     kernel_size: 3
     weight_filler {
-      ype: "msra"
+      type: "msra"
     }
     bias_filler {
       type: "constant"
