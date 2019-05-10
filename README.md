@@ -148,6 +148,7 @@
         ./classes_label_txt.txt
         ./classes_index_txt.txt
     ```
+- [calculate_boxes.py](./calculate_boxes.py) : 统计 `json` 文件中boundingbox数量；    
 - Caffe数据预处理
   - [creat_caffe_filelist.sh](./caffe/creat_caffe_filelist.sh)
   - [creat_caffe_lmdb.sh](./caffe/creat_caffe_lmdb.sh)
