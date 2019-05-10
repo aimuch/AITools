@@ -111,10 +111,10 @@ def write_data_to_excle(file_path, column_name, datas):
 
 if __name__ == '__main__':
     #   注意：tx保存的是jpg， 其他的是png格式的
-    print('正在处理数据....,请等待！！')
+    print('正在处理数据..., 请等待！')
     #   '''将json的整个文件夹放在./data下'''
     # files_path = './data'
-    
+
     files_path = '/media/andy/Data/Data/APA_SSE/APA_xinboyou/收回成品/a'
     #file_org = './result_area_edge'
     #if not os.path.isdir(file_org):
@@ -156,6 +156,6 @@ if __name__ == '__main__':
                 i =i+1
                 print(json_name)
 
-                print('像素>=10的个数: ', pix_num, '边<=3的格式: ', edge_num)
+                print('像素>=10的个数: ', pix_num, '; 边<=3的格式: ', edge_num)
     write_data_to_excle('./output.xlsx', ['json_name', 'pix_num'], [all_name, all_pix_num])
-    print('数据处理完成！！')
+    print('数据处理完成！')
