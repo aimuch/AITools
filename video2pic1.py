@@ -93,6 +93,9 @@ if __name__ == '__main__':
     os.makedirs(output_dir)
     print("Create video folder: ", output_dir)
   
-  for video in os.listdir(video_dir):
+  video_list = os.listdir(video_dir)
+  video_num = len(video_list)
+  for i, video in enumerate(os.listdir(video_dir)):
     video_path = os.path.join(video_dir, video)
+    print(">>> {}/{}".format((i+1), video_num), end=", ")
     video2pic(video_path, output_dir, interval, waitTime)
