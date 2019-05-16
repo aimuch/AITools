@@ -66,7 +66,7 @@ def video2pic(video_path, output_dir, interval, waitTime):
     if frame_num%interval == 0:
       count += 1
       pic_name = video_infor[0] + "_" +str(count).zfill(5) + ".jpeg"
-      # pic_name = video_infor + str(count).zfill(5) + ".png"
+      # pic_name = video_infor[0] + "_" +str(count).zfill(5) + ".png"
       pic_path = os.path.join(output_folder, pic_name)
 
       cv2.imwrite(pic_path, frame)
