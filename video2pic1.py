@@ -33,11 +33,19 @@ def parse_args():
 
 def video2pic(video_path, output_dir, interval, waitTime):
   # folder_info = os.path.split(video_path)    # [文件夹, 视频]
-  video_name = os.path.basename(video_path)  # video.avi
-  video_infor = video_name.split(".")       # [video, avi]
+  video_name = os.path.basename(video_path)    # video.avi
+  video_infor = video_name.split(".")          # [video, avi]
   # print(folder_info)
   # print(video_name)
   # print(video_infor)
+
+  if video_infor[-1] != "h264" and video_infor[-1] != "mkv" and video_infor[-1] != "mp4" and video_infor[-1] != "avi":
+    print("文件夹下有非视频文件，请检查！")
+    return
+
+  if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+    print("Create video folder: ", output_dir)
 
   ## set dst video folder
   output_folder = os.path.join(output_dir, video_infor[0])
@@ -45,10 +53,6 @@ def video2pic(video_path, output_dir, interval, waitTime):
     shutil.rmtree(output_folder)
   os.makedirs(output_folder)
 
-
-  if video_infor[-1] != "h264" and video_infor[-1] != "mkv" and video_infor[-1] != "mp4" and video_infor[-1] != "avi":
-    print("文件夹下有非视频文件，请检查！")
-    return
 
   cap = cv2.VideoCapture(video_path)
   fps = cap.get(5)   # CV_CAP_PROP_FPS
@@ -61,7 +65,8 @@ def video2pic(video_path, output_dir, interval, waitTime):
   while retval:
     if frame_num%interval == 0:
       count += 1
-      pic_name = str(count).zfill(5) + ".jpeg"
+      pic_name = video_infor[0] + "_" +str(count).zfill(5) + ".jpeg"
+      # pic_name = video_infor + str(count).zfill(5) + ".png"
       pic_path = os.path.join(output_folder, pic_name)
 
       cv2.imwrite(pic_path, frame)
@@ -89,10 +94,6 @@ if __name__ == '__main__':
     print("Error !!! %s is not exists, please check the parameter"%video_dir)
     sys.exit(0)
 
-  if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-    print("Create video folder: ", output_dir)
-  
   video_list = os.listdir(video_dir)
   video_num = len(video_list)
   for i, video in enumerate(os.listdir(video_dir)):
