@@ -3,7 +3,7 @@
 ### Last modified : 2019-05-15
 ### This tool is used to split videos into images(video_folder/video.h264)
 ### ----------------EXAMPLE-------------------
-###  python3 video2pic.py \
+###  python3 video2pic1.py \
 ###  		home/andy/data/train/video_folder \
 ###			home/andy/data/train/output_folder --interval 10  --waitTime 5
 
