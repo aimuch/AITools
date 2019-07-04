@@ -12,9 +12,12 @@ VAL_DATA_ROOT=/home/andy/caffe/examples/mydata/apa_slot/data/val/
 TEST_DATA_ROOT=/home/andy/caffe/examples/mydata/apa_slot/data/test/
 
 RESIZE=true
+NET_SIZE=128
+echo "Resize=true, Image Resized ($NET_SIZE, $NET_SIZE) ..."
+
 if $RESIZE; then
-  RESIZE_HEIGHT=128
-  RESIZE_WIDTH=128
+  RESIZE_HEIGHT=$NET_SIZE
+  RESIZE_WIDTH=$NET_SIZE
 else
   RESIZE_HEIGHT=0
   RESIZE_WIDTH=0
@@ -57,3 +60,4 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
 echo "\n"
 
 echo "All done!"
+echo "Image Size = ($NET_SIZE, $NET_SIZE)"
