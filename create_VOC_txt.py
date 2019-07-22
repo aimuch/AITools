@@ -42,7 +42,7 @@ def makelist(srcdir):
     val_file=open(val_path_txt,'w+')
 
     # filelist = os.listdir(srcdir) # list all files
-    filelist = glob(os.path.joint(srcdir, "*.jpg")) # list the specified files
+    filelist = glob(os.path.join(srcdir, "*.jpg")) # list the specified files
 
     trainset = random.sample(filelist, int(len(filelist)*0.7))
 
