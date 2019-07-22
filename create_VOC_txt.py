@@ -15,6 +15,7 @@ import os,sys
 import random
 from os import listdir, getcwd
 from os.path import join
+from glob import glob
 
 
 def parse_args():
@@ -40,7 +41,9 @@ def makelist(srcdir):
     train_file=open(train_path_txt,'w+')
     val_file=open(val_path_txt,'w+')
 
-    filelist = os.listdir(srcdir)
+    # filelist = os.listdir(srcdir) # list all files
+    filelist = glob(os.path.joint(srcdir, "*.jpg")) # list the specified files
+
     trainset = random.sample(filelist, int(len(filelist)*0.7))
 
     for file in filelist:
