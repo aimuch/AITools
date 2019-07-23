@@ -49,23 +49,25 @@ def pick(txt_dir, img_dir):
         fileInfor = file.split(".")
         txtpath = txt_dir + "/" + file
         txtfile = open(txtpath, "r")
-        lines = txtfile.read().split('\n')[:-1] # the last symbol is " "
+        lines = txtfile.read().split('\n')
         for line in lines:
-                obj = line.split(" ")[0]
-                if not obj in labelset:
-                    continue
-                dst_label_file = dst_label + "/" + file
-                srcimg = img_dir + "/" + fileInfor[0] + ".jpg"
-                dst_img_file = dst_img + "/" + fileInfor[0] + ".jpg"
-                if not os.path.exists(srcimg):
-                    srcimg = img_dir + "/" + fileInfor[0] + ".png"
-                    dst_img_file = dst_img + "/" + fileInfor[0] + ".png"
+            if line is '' or line is None:
+                continue
+            obj = line.split(" ")[0]
+            if not obj in labelset:
+                continue
+            dst_label_file = dst_label + "/" + file
+            srcimg = img_dir + "/" + fileInfor[0] + ".jpg"
+            dst_img_file = dst_img + "/" + fileInfor[0] + ".jpg"
+            if not os.path.exists(srcimg):
+                srcimg = img_dir + "/" + fileInfor[0] + ".png"
+                dst_img_file = dst_img + "/" + fileInfor[0] + ".png"
 
-                if not os.path.exists(srcimg):
-                    break
+            if not os.path.exists(srcimg):
+                break
 
-                shutil.copyfile(txtpath, dst_label_file)
-                shutil.copyfile(srcimg, dst_img_file)
+            shutil.copyfile(txtpath, dst_label_file)
+            shutil.copyfile(srcimg, dst_img_file)
     print("Path of picked labels = ",os.path.abspath(dst_label))
     print("Path of picked images = ",os.path.abspath(dst_img))
 
