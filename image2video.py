@@ -21,6 +21,8 @@ def parse_args():
 
 def img2video(image_dir, output_dir, fps):
     img_list = os.listdir(image_dir)
+
+    # height, width, channels
     img_shape = cv2.imread(os.path.join(image_dir, img_list[0])).shape[:2]
     print(img_shape)
 
@@ -29,6 +31,8 @@ def img2video(image_dir, output_dir, fps):
     #fourcc = cv2.VideoWriter_fourcc(*'XVID') # .avi
     # fourcc = cv2.VideoWriter_fourcc(*'MJPG')
     fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+
+    ##                                                                                   cv2.Size=(width, height)
     videoWriter = cv2.VideoWriter(os.path.join(output_dir, 'output.avi'), fourcc, fps, (img_shape[1], img_shape[0]))
 
     for i in tqdm(img_list):
