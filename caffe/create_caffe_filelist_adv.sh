@@ -1,9 +1,9 @@
 #!/bin/bash
 # file tree:
 # data
-# --train               --val                   --test
-# ----class1            ----class1              ----class1        
-# ------folder1         ------folder1           ------folder1
+# |--train               |--val                   |--test
+# |--|--class1           |--|--class1             |--|--class1        
+# |--|--|--folder1       |--|--|--folder1         |--|--|--folder1
 
 
 DATA=/home/andy/caffe/examples/mydata/conerClassifier/data
