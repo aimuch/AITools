@@ -1,12 +1,11 @@
 ### Author : Andy
-### Last modified : 2018-11-02
+### Last modified : 2019-11-20
 
-### This tool is used to draw bbox labels 
+### This tool is used to resize image
 ### -----------EXAMPLE-------------------
 ### python img_resize.py \
-###        /home/data/Annotations \
-###        /home/data/JPEGImages \
-###        /home/data/output_draw
+###        ./img_src_folder \
+###        ./img_dst_folder
 
 import os 
 import sys
@@ -41,7 +40,8 @@ def reimg(img_src, img_dst):
 
             output_path = os.path.join(output_folder, file)
             #print("output_path:%s"%output_path)
-            imgresized = cv2.resize(img, size_dst)
+            imgresized = cv2.resize(img, size_dst) # 默认双线性差值
+            # imgresized = cv2.resize(img, size_dst, interpolation=cv2.INTER_NEAREST) # 最近邻
             cv2.imwrite(output_path, imgresized)
         print("%s done"%folder_path)
 
