@@ -4,8 +4,19 @@
 ### This tool is used to resize image
 ### -----------EXAMPLE-------------------
 ### python img_resize.py \
-###        ./img_src_folder \
-###        ./img_dst_folder
+###        ./img_src_folders \
+###        ./img_dst_folders
+
+# the folder tree is:
+# img_src_folders
+# └── uss_map_jpg
+#     ├── 1520502110.760000.jpg
+#     ├── 1520502110_861000.jpg
+#     ├── 1520502110_962000.jpg
+#     ├── 1520502111_062000.jpg
+#     ├── 1520502111_163000.jpg
+#     ├── 1520502111_260000.jpg
+   
 
 import os 
 import sys
