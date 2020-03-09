@@ -1,7 +1,7 @@
 import pandas as pd
 
-EXCEL_PATH = "/home/andy/DevWorkSpace/Data/label_proj_picture.xlsx"
-TXT_PATH = "/home/andy/DevWorkSpace/Data/label_proj_picture.txt"
+EXCEL_PATH = "./label_proj_picture.xlsx"
+TXT_PATH = "./label_proj_picture.txt"
 
 data = pd.read_excel(EXCEL_PATH)
 
