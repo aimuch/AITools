@@ -176,7 +176,7 @@ print('find label', len(labels))
 min_length = 1e10
 max_length = 1
 
-img_h, img_w = 800, 800
+img_h, img_w = 1080, 1920
 
 for idx, img in enumerate(images):
     print(idx, 'read image', img)
