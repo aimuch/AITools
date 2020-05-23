@@ -3,7 +3,7 @@
 # Last modified: 2020-05-22
 
 # This tool is used to pick images by text list
-# input: python3 pick_img_by_xml.py ./xml_folder ./img_folder
+# input: python3 pick_img_by_xml.py ./xml_folder ./img_folder ./dst_folder
 # output:
 # 	./pickedImg
 #NOTE: xml file contains the image path
@@ -22,14 +22,16 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('srcXML', help='XML file', type=str)
     parser.add_argument('srcIMG', help='images directory', type=str)
+    parser.add_argument('dstFolder', help='target directory', type=str)
+
 
     args = parser.parse_args()
     return args
 
 
-def pick(srcXML, srcIMG):
-    pickedIMG_dir = "./pickedIMG"
-    pickedXML_dir = "./pickedXML"
+def pick(srcXML, srcIMG, dstFolder):
+    pickedIMG_dir = os.path.join(dstFolder, "pickedIMG")
+    pickedXML_dir = os.path.join(dstFolder, "pickedXML")
 
     srcXML = os.path.abspath(srcXML)
     if srcXML[-1] == "/":
@@ -47,6 +49,7 @@ def pick(srcXML, srcIMG):
         xmlFolder = os.path.join(srcXML, xmlFolder)
         if not os.path.isdir(xmlFolder):
             continue
+        print(">>>>>> ", os.path.basename(xmlFolder), " is processing ...")
         xmlList = os.listdir(xmlFolder)
         for xml_file in tqdm(xmlList):
             xml_path = os.path.join(xmlFolder, xml_file)
@@ -73,7 +76,7 @@ def pick(srcXML, srcIMG):
                 os.makedirs(xml_new_folder)
             img_new_path = os.path.join(img_new_folder, img_name)
             xml_new_path = os.path.join(xml_new_folder, xml_file)
-            # print(">>>>>>>>>>>>>>", img_name)
+            # print(">>>>>> ", img_name)
             
             # copy file
             shutil.copyfile(img_path, img_new_path)
@@ -84,6 +87,7 @@ if __name__ == '__main__':
     args = parse_args()
     srcXML = args.srcXML
     srcIMG = args.srcIMG
+    dstFolder = args.dstFolder
     
     if not os.path.exists(srcXML):
         print("Error !!! %s is not exists, please check the parameter"%srcXML)
@@ -94,6 +98,9 @@ if __name__ == '__main__':
         print("Error !!! %s is not exists, please check the parameter"%srcIMG)
         sys.exit(0)
 
-    pick(srcXML,  srcIMG)
+    if not os.path.exists(dstFolder):
+        print("Warning !!! %s is not exists, now has created "%dstFolder)
+
+    pick(srcXML,  srcIMG, dstFolder)
     # pick("./xmlFolder",  "./imgfolder")
     print("Done!")
