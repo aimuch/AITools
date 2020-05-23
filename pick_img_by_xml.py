@@ -28,15 +28,18 @@ def parse_args():
 
 
 def pick(srcXML, srcIMG):
-    pickedImg_dir = "./pickedImg"
+    pickedIMG_dir = "./pickedIMG"
+    pickedXML_dir = "./pickedXML"
 
     srcXML = os.path.abspath(srcXML)
     if srcXML[-1] == "/":
         srcXML = srcXML[:-1]
 
     # recreate folder
-    if not os.path.exists(pickedImg_dir):
-        os.makedirs(pickedImg_dir)
+    if not os.path.exists(pickedIMG_dir):
+        os.makedirs(pickedIMG_dir)
+    if not os.path.exists(pickedXML_dir):
+        os.makedirs(pickedXML_dir)
     
     xmlFolderList = os.listdir(srcXML)
 
@@ -46,27 +49,36 @@ def pick(srcXML, srcIMG):
             continue
         xmlList = os.listdir(xmlFolder)
         for xml_file in tqdm(xmlList):
-            xml_file = os.path.join(xmlFolder, xml_file)
-            xml_info = xml_file.split(".")
+            xml_path = os.path.join(xmlFolder, xml_file)
+            xml_info = xml_path.split(".")
             # print(xml_info)
             if xml_info[-1] != "xml":
                 continue
             
-            dom = xml.dom.minidom.parse(xml_file)
+            dom = xml.dom.minidom.parse(xml_path)
             collection = dom.documentElement
             path = collection.getElementsByTagName('path')[0]
             img_path = path.childNodes[0].data
             img_path = os.path.join(srcIMG, img_path)
             img_name = os.path.basename(img_path)
+            if not os.path.exists(img_path):
+                print("IMG not found: ", img_name)
+                continue
 
-            img_new_folder = os.path.join(pickedImg_dir, os.path.basename(xmlFolder))
+            img_new_folder = os.path.join(pickedIMG_dir, os.path.basename(xmlFolder))
+            xml_new_folder = os.path.join(pickedXML_dir, os.path.basename(xmlFolder))
             if not os.path.exists(img_new_folder):
                 os.makedirs(img_new_folder)
+            if not os.path.exists(xml_new_folder):
+                os.makedirs(xml_new_folder)
             img_new_path = os.path.join(img_new_folder, img_name)
+            xml_new_path = os.path.join(xml_new_folder, xml_file)
             # print(">>>>>>>>>>>>>>", img_name)
             
+            # copy file
             shutil.copyfile(img_path, img_new_path)
-    print("Path of picked images = ", os.path.abspath(pickedImg_dir))
+            shutil.copyfile(xml_path, xml_new_path)
+    print("Path of picked images = ", os.path.abspath(pickedIMG_dir))
 
 if __name__ == '__main__':
     args = parse_args()
