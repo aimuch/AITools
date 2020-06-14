@@ -192,19 +192,27 @@ def convert_annotations(xml_dirs, img_dirs):
                     txt_file.write(label + " " + " ".join([str(a) for a in bb]) + '\n')
 
                     if WITH_PROCESS_SUB_CLASSES and group_id:
+                        # print("---", group_id, ", ", label)
                         if label in classes:
-                            obj_groups[group_id] = {"vehicle":[xtl, ytl, xbr, ybr]} # 固定住key便于后面便利
-                        elif label in sub_classes and not obj_groups[group_id].has_key(label):
-                            obj_groups[group_id] = {label:[[xtl, ytl, xbr, ybr]]}
-                        elif label in sub_classes:
-                            obj_groups[group_id][label].append([xtl, ytl, xbr, ybr])
-                        
+                            if group_id not in obj_groups:
+                                obj_groups[group_id] = {"vehicle":[xtl, ytl, xbr, ybr]} # 固定住key便于后面便利
+                            else:
+                                obj_groups[group_id]["vehicle"] = [xtl, ytl, xbr, ybr]
+                        if label in sub_classes:
+                            if group_id not in obj_groups:
+                                obj_groups[group_id] = {label:[[xtl, ytl, xbr, ybr]]}
+                            else:
+                                if label not in obj_groups[group_id]:
+                                    obj_groups[group_id][label] = [[xtl, ytl, xbr, ybr]]
+                                else:
+                                    obj_groups[group_id][label].append([xtl, ytl, xbr, ybr])
+                            
                 txt_file.close()
                 shutil.copyfile(img_src_path, img_dst_path)
     
                 # Process sub class
                 for group_id, objs in obj_groups.items(): # group
-                    for label, coordinate in objs: # classes
+                    for label, coordinate in objs.items(): # classes
                         if label in sub_classes:
                             xtl1 = objs["vehicle"][0]
                             ytl1 = objs["vehicle"][1]
@@ -223,10 +231,10 @@ def convert_annotations(xml_dirs, img_dirs):
                                 ybr2 = coor[3] - objs["vehicle"][1]
                                 
                                 bb = convert((xbr1-xtl1, ybr1-ytl1), (xtl2, xbr2, ytl2, ybr2))
-                                txt_file_subclass.write(label, " ".join([str(a) for a in bb]) + '\n')
+                                txt_file_subclass.write(label + " " + " ".join([str(a) for a in bb]) + '\n')
 
                                 txt_file_subclass.close()
-                                cv2.imwrite(img_dst_path_subclass, img[xtl2:xbr2, ytl2:ybr2])
+                                cv2.imwrite(img_dst_path_subclass, img[int(ytl2):int(ybr2), int(xtl2):int(xbr2)])
                                 index += 1
 
     log_file.close()
