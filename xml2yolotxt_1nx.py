@@ -255,19 +255,17 @@ def convert_annotations(xml_dirs, img_dirs):
     print("Path of valid text = ", os.path.abspath(txt_val_path))
 
 if __name__ == '__main__':
-    # args = parse_args()
-    # xml_dirs = args.xml_dirs
-    # if not os.path.exists(xml_dirs):
-    #     print("Error !!! %s is not exists, please check the parameter"%xml_dirs)
-    #     sys.exit(0)
+    args = parse_args()
+    xml_dirs = args.xml_dirs
+    if not os.path.exists(xml_dirs):
+        print("Error !!! %s is not exists, please check the parameter"%xml_dirs)
+        sys.exit(0)
     
-    # img_dirs = args.img_dirs
-    # if not os.path.exists(img_dirs):
-    #     print("Error !!! %s is not exists, please check the parameter"%img_dirs)
-    #     sys.exit(0)
+    img_dirs = args.img_dirs
+    if not os.path.exists(img_dirs):
+        print("Error !!! %s is not exists, please check the parameter"%img_dirs)
+        sys.exit(0)
 
-    xml_dirs = "./xml"
-    img_dirs = "./img"
     convert_annotations(xml_dirs, img_dirs)
     print("Done!")
     # os.system("cat train.txt val.txt > trainAll.txt")
