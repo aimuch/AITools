@@ -31,12 +31,15 @@ from tqdm import tqdm
 WITH_GROUP_ID = False
 WITH_SUB_CLASSES = True
 WITH_PROCESS_SUB_CLASSES = True
+DRAW_VEHICLE = False
+DRAW_LIGHT = False
 TRAIN_RATIO = 0.8
 classes = ["car","van","bus","truck"]
 sub_classes = ["brakelight", "headlight"]
 
 error_log = "./log.txt"
-draw_path = "./draw_img"
+draw_path1 = "./draw_img1"
+draw_path2 = "./draw_img2"
 output_txt_path = "./output_txt"
 output_img_path = "./output_img"
 output_txt_path_subclass = "./output_txt_subclass"
@@ -143,7 +146,7 @@ def convert_annotations(xml_dirs, img_dirs):
                     print(img_src_path, " is not exists!")
                     log_file.write(os.path.basename(img_src_path) + "\n")
                     continue
-                # Check whether the image is complete
+                # Check whether the image is completename+"_"+frame_id+".jpg"
                 img = cv2.imread(img_src_path)
                 if img is None:
                     print("%s can't read!"%img_src_path)
@@ -206,36 +209,44 @@ def convert_annotations(xml_dirs, img_dirs):
                                     obj_groups[group_id][label] = [[xtl, ytl, xbr, ybr]]
                                 else:
                                     obj_groups[group_id][label].append([xtl, ytl, xbr, ybr])
-                            
+                    
+                    if DRAW_VEHICLE:
+                        cv2.rectangle(img, (int(xtl), int(ytl)), (int(xbr), int(ybr)), (0,0,255))          
                 txt_file.close()
                 shutil.copyfile(img_src_path, img_dst_path)
+
+                # draw box in image
+                if DRAW_VEHICLE:
+                        img_draw1 = os.path.join(draw_path1, name+"_"+frame_id+".jpg")
+                        cv2.imwrite(img_draw1, img)
     
                 # Process sub class
                 for group_id, objs in obj_groups.items(): # group
+                    if "vehicle" not in  list(objs.keys()):
+                        print("---- Warning: image=%s, group_id=%s only contains lights!" %(img_src_path, group_id))
+                        continue
                     for label, coordinate in objs.items(): # classes
                         if label in sub_classes:
                             xtl1 = objs["vehicle"][0]
                             ytl1 = objs["vehicle"][1]
                             xbr1 = objs["vehicle"][2]
                             ybr1 = objs["vehicle"][3]
-                            index = 0
+                            name_subclass = os.path.basename(img_src_path).split(".")[0]+"_"+group_id
+                            txt_file_path_subclass = os.path.join(output_txt_path_subclass, name_subclass+".txt")
+                            txt_file_subclass = open(txt_file_path_subclass, 'w')
+                            img_dst_sub_name = name_subclass + ".jpg"
+                            img_dst_path_subclass = os.path.join(output_img_path_subclass, img_dst_sub_name)
+                            cv2.imwrite(img_dst_path_subclass, img[int(ytl1):int(ybr1), int(xtl1):int(xbr1)])
                             for coor in coordinate: # sub classes
-                                name_subclass = os.path.basename(img_src_path).split(".")[0]+"_"+group_id+"_"+str(index)
-                                txt_file_path_subclass = os.path.join(output_txt_path_subclass, name_subclass+".txt")
-                                txt_file_subclass = open(txt_file_path_subclass, 'w')
-                                img_dst_sub_name = name_subclass + ".jpg"
-                                img_dst_path_subclass = os.path.join(output_img_path_subclass, img_dst_sub_name)
-                                xtl2 = coor[0] - objs["vehicle"][0]
-                                ytl2 = coor[1] - objs["vehicle"][1]
-                                xbr2 = coor[2] - objs["vehicle"][0]
-                                ybr2 = coor[3] - objs["vehicle"][1]
+                                xtl2 = coor[0] - xtl1
+                                ytl2 = coor[1] - ytl1
+                                xbr2 = coor[2] - xtl1
+                                ybr2 = coor[3] - ytl1
                                 
                                 bb = convert((xbr1-xtl1, ybr1-ytl1), (xtl2, xbr2, ytl2, ybr2))
                                 txt_file_subclass.write(label + " " + " ".join([str(a) for a in bb]) + '\n')
 
-                                txt_file_subclass.close()
-                                cv2.imwrite(img_dst_path_subclass, img[int(ytl2):int(ybr2), int(xtl2):int(xbr2)])
-                                index += 1
+                            txt_file_subclass.close()
 
     log_file.close()
     
@@ -259,5 +270,5 @@ if __name__ == '__main__':
     img_dirs = "./img"
     convert_annotations(xml_dirs, img_dirs)
     print("Done!")
-    os.system("cat train.txt val.txt > trainAll.txt")
-    print("Path of all train text =", os.path.abspath("./trainAll.txt"))
+    # os.system("cat train.txt val.txt > trainAll.txt")
+    # print("Path of all train text =", os.path.abspath("./trainAll.txt"))
