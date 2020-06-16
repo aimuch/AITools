@@ -35,7 +35,7 @@ DRAW_VEHICLE = False
 DRAW_LIGHT = False
 TRAIN_RATIO = 0.8
 classes = ["car","van","bus","truck"]
-sub_classes = ["brakelight", "headlight"]
+sub_classes = ["headlight", "brakelight"]
 
 error_log = "./log.txt"
 draw_path1 = "./draw_img1"
@@ -244,7 +244,7 @@ def convert_annotations(xml_dirs, img_dirs):
                                 ybr2 = coor[3] - ytl1
                                 
                                 bb = convert((xbr1-xtl1, ybr1-ytl1), (xtl2, xbr2, ytl2, ybr2))
-                                txt_file_subclass.write(label + " " + " ".join([str(a) for a in bb]) + '\n')
+                                txt_file_subclass.write(str(sub_classes.index(label)) + " " + " ".join([str(a) for a in bb]) + '\n')
 
                             txt_file_subclass.close()
 
