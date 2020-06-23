@@ -4,7 +4,7 @@
 
 # This tool is used to pick xml and image from the some folder
 # This file should put on the same path with the folder
-# input: python pick_all_xml_img.py "/home/andy/data/img"
+# input: pick_xml_img_by_xml.py  ./xml ./img
 # output:
 # 	./pickedXml
 # 	./pickedImg
