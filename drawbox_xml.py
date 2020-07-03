@@ -78,24 +78,24 @@ def draw_labelling(xml_dir, img_dir, output_dir):
 
 
 if __name__ == '__main__':
-    # args = parse_args()
-    # xml_dir = args.xml_dir
-    # img_dir = args.img_dir
-    # output_dir = args.output_dir
+    args = parse_args()
+    xml_dir = args.xml_dir
+    img_dir = args.img_dir
+    output_dir = args.output_dir
 
-    # if not os.path.exists(xml_dir):
-    #     print("Error !!! %s is not exists, please check the parameter"%xml_dir)
-    #     sys.exit(0)
+    if not os.path.exists(xml_dir):
+        print("Error !!! %s is not exists, please check the parameter"%xml_dir)
+        sys.exit(0)
 
-    # if not os.path.exists(img_dir):
-    #     print("Error !!! %s is not exists, please check the parameter"%img_dir)
-    #     sys.exit(0)
+    if not os.path.exists(img_dir):
+        print("Error !!! %s is not exists, please check the parameter"%img_dir)
+        sys.exit(0)
 
-    # if not os.path.exists(output_dir):
-    #     os.makedirs(output_dir)
-    #     print("Output folder = ", os.path.abspath(output_dir))
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+        print("Output folder = ", os.path.abspath(output_dir))
 
-    xml_dir = "./labelxml"
-    img_dir = "./images"
-    output_dir = "./output"
+    # xml_dir = "./labelxml"
+    # img_dir = "./images"
+    # output_dir = "./output"
     draw_labelling(xml_dir, img_dir, output_dir)
