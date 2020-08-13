@@ -11,6 +11,7 @@ import os
 import shutil
 import sys
 import argparse
+from tqdm import tqdm
 
 
 def parse_args():
@@ -38,17 +39,14 @@ def pick(delListTxt, imgDir):
     os.makedirs(pickedImg_dir)
 
     file_ = open(delListTxt, 'r')
-    delimglists = file_.readlines()
+    delimglists = [f.strip() for f in file_.readlines()]
     file_.close()
 
-    for img in imglists:
+    for img in tqdm(imglists):
         img = img.strip()
         imgname = os.path.basename(img)
-        if img in delimglists:
+        if imgname in delimglists:
             continue
-
-        print(imgname + " -->start!")
-        fileInfor = imgname.split(".")
 
         src_img = os.path.join(imgDir, img)
         dst_img = os.path.join(pickedImg_dir, imgname)
