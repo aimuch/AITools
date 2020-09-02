@@ -13,6 +13,10 @@ from tqdm import tqdm
 
 DEBUG = False
 
+# set your need categorys
+# categorys = ['car', 'bus', 'person', 'bike', 'truck', 'motor', 'train', 'rider', 'traffic sign', 'traffic light']
+categorys = ['car', 'person', 'bike', 'truck', 'moter', 'bus', 'rider']
+
 BDD_FOLDER = "/home/andy/Data/BDD100K"
 
 if DEBUG:
@@ -65,6 +69,9 @@ def bdd_to_voc(bdd_folder, xml_folder):
                 else:
                     bndbox = get_bbox(box2d)
 
+                if label['category'] not in categorys:
+                    continue
+                
                 object_ = Element('object')
                 SubElement(object_, 'name').text = label['category']
                 classes.add(label['category'])
