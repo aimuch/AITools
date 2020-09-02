@@ -20,9 +20,9 @@ categorys = ['car', 'person', 'bike', 'truck', 'moter', 'bus', 'rider']
 BDD_FOLDER = "/home/andy/Data/BDD100K"
 
 if DEBUG:
-    XML_PATH = "./xml"
+    XML_PATH = "./labels_voc"
 else:
-    XML_PATH = BDD_FOLDER + "/xml"
+    XML_PATH = BDD_FOLDER + "/labels_voc"
 
 
 def bdd_to_voc(bdd_folder, xml_folder):
