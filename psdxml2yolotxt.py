@@ -8,8 +8,8 @@
 # input : python xml2txt.py "/home/andy/data/xml"   "/home/andy/data/img"
 # output :
 #       ./txt
-#	./train.txt
-#	./val.txt
+#		./train.txt
+#		./val.txt
 #       ./trainAll.txt
 
 import xml.dom.minidom
