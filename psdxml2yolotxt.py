@@ -27,6 +27,7 @@ from tqdm import tqdm
 WITH_IMAGE = True
 REWRITE = True
 DRAW_LABEL = True
+COPY_TXT_TO_IMG_FOLDER = True
 TRAIN_RATE = 0.8
 CONER_ROI_SIZE = 21
 
@@ -127,7 +128,8 @@ def convert_annotation(xml_dir, img_dir):
         else:
             txt_val_list.write(imgfile + '\n')
 
-        out_file = open(txt_dir + "/" + fileInfor[0] + ".txt", 'w')
+        txt_path = txt_dir + "/" + fileInfor[0] + ".txt"
+        out_file = open(txt_path, 'w')
 
         dom = xml.dom.minidom.parse(xml_path)
         annotation = dom.documentElement
@@ -173,6 +175,9 @@ def convert_annotation(xml_dir, img_dir):
             cv2.rectangle(img, (xtl, ytl), (xbr, ybr), (255, 0, 0))
 
         out_file.close()
+        if COPY_TXT_TO_IMG_FOLDER:
+            dst_txt = os.path.join(img_dir, os.path.basename(txt_path))
+            shutil.copyfile(txt_path, dst_txt)
         if DRAW_LABEL:
             draw_path =  xml_dir + "_" + draw_folder
             if not os.path.exists(draw_path):
