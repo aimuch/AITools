@@ -174,7 +174,7 @@ def convert_annotation(xml_dir, img_dir):
 
         out_file.close()
         if DRAW_LABEL:
-            draw_path =  os.path.join(os.path.dirname(xml_path), draw_folder)
+            draw_path =  os.path.join(os.path.dirname(xml_dir), draw_folder)
             if not os.path.exists(draw_path):
                 os.makedirs(draw_path)
             new_img = os.path.join(draw_path, os.path.basename(imgfile))
