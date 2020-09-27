@@ -168,7 +168,7 @@ def convert_annotation(xml_dir, img_dir):
             # label_id = classes.index(label)
             label_id = 0    #! TODO
             b = (float(xtl), float(xbr), float(ytl), float(ybr))
-            bb = convert((w, h), b)
+            bb = convert((width, height), b)
             out_file.write(str(label_id) + " " + " ".join([str(a) for a in bb]) + '\n')
             # out_file.flush()
             cv2.circle(img, (x, y), 4, (0, 0, 255), -1)
