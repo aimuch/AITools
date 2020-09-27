@@ -28,7 +28,7 @@ WITH_IMAGE = True
 REWRITE = True
 DRAW_LABEL = True
 TRAIN_RATE = 0.8
-CONER_ROI_SIZE = 17
+CONER_ROI_SIZE = 21
 
 classes = ["01_key_point", "02_key_point", "03_key_point", "04_key_point", "05_key_point", "06_key_point", "07_key_point"]
 # classes = ["01_key_point", "02_key_point", "03_key_point", "04_key_point",
@@ -174,7 +174,7 @@ def convert_annotation(xml_dir, img_dir):
 
         out_file.close()
         if DRAW_LABEL:
-            draw_path =  os.path.join(os.path.dirname(xml_dir), draw_folder)
+            draw_path =  xml_dir + "_" + draw_folder
             if not os.path.exists(draw_path):
                 os.makedirs(draw_path)
             new_img = os.path.join(draw_path, os.path.basename(imgfile))
