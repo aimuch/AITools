@@ -19,22 +19,23 @@ import os
 import sys
 import cv2
 import argparse
+import shutil
 from os import listdir, getcwd
 from os.path import join
 from tqdm import tqdm
 
 WITH_IMAGE = True
-REWRITE = False
+REWRITE = True
 DRAW_LABEL = True
 TRAIN_RATE = 0.8
 CONER_ROI_SIZE = 17
 
-classes = ["01_key_point", "02_key_point", "03_key_point", "04_key_point"]
+classes = ["01_key_point", "02_key_point", "03_key_point", "04_key_point", "05_key_point", "06_key_point", "07_key_point"]
 # classes = ["01_key_point", "02_key_point", "03_key_point", "04_key_point",
 #             "01 key_point", "02 key_point", "03 key_point", "04 key_point"]
 
 error_log = "./log.txt"
-draw_path = "./draw_img"
+draw_folder = "draw_img"
 
 
 def parse_args():
@@ -75,17 +76,22 @@ def convert_annotation(xml_dir, img_dir):
     trainnum = int(len(filelist)*TRAIN_RATE)
     trainset = random.sample(filelist, trainnum)
 
-    txt_dir = os.path.basename(xml_dir) + "_txt"
-    if not os.path.exists(txt_dir):
-        os.makedirs(txt_dir)
-    txt_train_path = "./train.txt"
-    txt_val_path = "./val.txt"
+    txt_dir = os.path.join(os.path.dirname(xml_dir), os.path.basename(xml_dir) + "_txt")
+    if os.path.exists(txt_dir):
+        shutil.rmtree(txt_dir)
+    os.makedirs(txt_dir)
+    # txt_train_path =  os.path.join(os.path.dirname(xml_dir), "train.txt")
+    # txt_val_path =  os.path.join(os.path.dirname(xml_dir), "val.txt")
 
     if REWRITE:
+        txt_train_path =  "./train.txt"
+        txt_val_path =  "./val.txt"
         txt_train_list = open(txt_train_path, 'a+')
         txt_val_list = open(txt_val_path, 'a+')
         log_file = open(error_log, 'a+')
     else:
+        txt_train_path =  os.path.join(os.path.dirname(xml_dir), "train.txt")
+        txt_val_path =  os.path.join(os.path.dirname(xml_dir), "val.txt")
         txt_train_list = open(txt_train_path, 'w')
         txt_val_list = open(txt_val_path, 'w')
         log_file = open(error_log, 'w')
@@ -158,7 +164,7 @@ def convert_annotation(xml_dir, img_dir):
             # print(label, xtl, ytl, xbr, ybr)
 
             # label_id = classes.index(label)
-            label_id = 0
+            label_id = 0    #! TODO
             b = (float(xtl), float(xbr), float(ytl), float(ybr))
             bb = convert((w, h), b)
             out_file.write(str(label_id) + " " + " ".join([str(a) for a in bb]) + '\n')
@@ -168,6 +174,7 @@ def convert_annotation(xml_dir, img_dir):
 
         out_file.close()
         if DRAW_LABEL:
+            draw_path =  os.path.join(os.path.dirname(xml_path), draw_folder)
             if not os.path.exists(draw_path):
                 os.makedirs(draw_path)
             new_img = os.path.join(draw_path, os.path.basename(imgfile))
@@ -179,22 +186,71 @@ def convert_annotation(xml_dir, img_dir):
     print("Path of valid text = ", os.path.abspath(txt_val_path))
 
 if __name__ == '__main__':
-    args = parse_args()
-    xml_dir = args.xml_dir
-    if not os.path.exists(xml_dir):
-        print("Error !!! %s is not exists, please check the parameter"%xml_dir)
-        sys.exit(0)
+    # args = parse_args()
+    # xml_dir = args.xml_dir
+    # if not os.path.exists(xml_dir):
+    #     print("Error !!! %s is not exists, please check the parameter"%xml_dir)
+    #     sys.exit(0)
 
 
-    if WITH_IMAGE:
-        img_dir = args.img_dir
-        if not os.path.exists(img_dir):
-            print("Error !!! %s is not exists, please check the parameter"%img_dir)
-            sys.exit(0)
-    else:
-        img_dir = None
+    # if WITH_IMAGE:
+    #     img_dir = args.img_dir
+    #     if not os.path.exists(img_dir):
+    #         print("Error !!! %s is not exists, please check the parameter"%img_dir)
+    #         sys.exit(0)
+    # else:
+    #     img_dir = None
 
-    convert_annotation(xml_dir, img_dir)
+    # xml_dir = "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_L_xml"
+    # img_dir = "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_L"
+    xml_dir = ["/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Brick/parking_key_point1013_zd_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Grass/parking_key_point0828_cd_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Grass/parking_key_point0828_cd_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Oblique/parking_key_point0903_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Oblique/parking_key_point0903_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point0828_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point0828_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point1012_tf_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point1012_tf_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1012_bq_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1012_bq_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1023_ck_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1023_ck_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1102_rk_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1102_rk_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1116_yq_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1116_yq_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1119_yq_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1119_yq_R_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Trapezoidal/parking_key_point1019_guan_L_xml",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Trapezoidal/parking_key_point1019_guan_R_xml"]
+    img_dir = ["/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Brick/parking_key_point1013_zd_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Grass/parking_key_point0828_cd_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Grass/parking_key_point0828_cd_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Oblique/parking_key_point0903_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Oblique/parking_key_point0903_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point0828_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point0828_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point1012_tf_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Open/parking_key_point1012_tf_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1012_bq_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1012_bq_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1023_ck_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1023_ck_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1102_rk_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1102_rk_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1116_yq_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1116_yq_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1119_yq_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Rectangular/parking_key_point1119_yq_R",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Trapezoidal/parking_key_point1019_guan_L",
+                "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Trapezoidal/parking_key_point1019_guan_R"]
+    for x, i in zip(xml_dir, img_dir):
+        convert_annotation(x, i)
     print("Done!")
     os.system("cat train.txt val.txt > trainAll.txt")
     print("Path of all train text =", os.path.abspath("./trainAll.txt"))
