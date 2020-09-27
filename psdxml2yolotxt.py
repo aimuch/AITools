@@ -116,12 +116,6 @@ def convert_annotation(xml_dir, img_dir):
             print("%s can't read!"%imgfile)
             continue
 
-        if DRAW_LABEL:
-            if not os.path.exists(draw_path):
-                os.makedirs(draw_path)
-            new_img = os.path.join(draw_path, os.path.basename(imgfile))
-            #print("new_img", new_img)
-
         if f in trainset:
             txt_train_list.write(imgfile + '\n')
         else:
@@ -174,6 +168,10 @@ def convert_annotation(xml_dir, img_dir):
 
         out_file.close()
         if DRAW_LABEL:
+            if not os.path.exists(draw_path):
+                os.makedirs(draw_path)
+            new_img = os.path.join(draw_path, os.path.basename(imgfile))
+            #print("new_img", new_img)
             cv2.imwrite(new_img, img)
 
     print("Path of txt folder = ", os.path.abspath(txt_dir))
@@ -196,8 +194,6 @@ if __name__ == '__main__':
     else:
         img_dir = None
 
-    # xml_dir = "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_L_xml"
-    # img_dir = "/home/andy/WorkSpace/PSD/dataset/Parking-slot-dataset/Curve/parking_key_point1023_xld_L"
     convert_annotation(xml_dir, img_dir)
     print("Done!")
     os.system("cat train.txt val.txt > trainAll.txt")
