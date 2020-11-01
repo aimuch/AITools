@@ -3,7 +3,7 @@
 # Last modified: 2020-09-19
 
 # This tool is used to pick images by text list
-# input: python3 remove_img_by_list.py "delete.txt" "/home/andy/data/img"
+# input: python3 remove_img_by_list.py "good.txt" "/home/andy/data/img"
 # output:
 # 	./pickedImgOut
 
