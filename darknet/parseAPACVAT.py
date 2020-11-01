@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Reference VOC scrips
 # Author : Andy Liu
-# last modify : 2020-11-01
+# last modify : 2020-09-27
 
 # This tool is used to convert VOC xml format to YOLO V3 format
 # And pick 80% for train, left for val
@@ -169,41 +169,59 @@ def convert_annotation(xml_dir, img_dir):
                 label = polygon.getAttribute("label")
                 points = polygon.getAttribute('points').split(';')
 
-                # The first entry point
-                enterPoint1 = (int(float(points[0].split(',')[0])), int(float(points[0].split(',')[1])))
-                xtl1 = int(enterPoint1[0] - (CONER_ROI_SIZE)/2)
-                ytl1 = int(enterPoint1[1] - (CONER_ROI_SIZE)/2)
-                xbr1 = int(enterPoint1[0] + (CONER_ROI_SIZE)/2)
-                ybr1 = int(enterPoint1[1] + (CONER_ROI_SIZE)/2)
-                xtl1 = xtl1 if xtl1 > 0 else 0
-                ytl1 = ytl1 if ytl1 > 0 else 0
-                xbr1 = xbr1 if xbr1 < width else width
-                ybr1 = ybr1 if ybr1 < height else height
-                cv2.rectangle(imgdata, (int(xbr1), int(ybr1)), (int(xtl1), int(ytl1)), (0, 0, 255))
-                labelID = 0 #! TODO
-                b = (float(xtl1), float(xbr1), float(ytl1), float(ybr1))
-                bb = convert((width, height), b)
-                outFile.write(str(labelID) + " " + " ".join([str(a) for a in bb]) + '\n')
-                cv2.circle(imgdata, (enterPoint1[0], enterPoint1[1]), 4, (0, 0, 255), -1)
-                cv2.rectangle(imgdata, (xtl1, ytl1), (xbr1, ybr1), (255, 0, 0))
+                for point in points:
+                    p = (int(float(point.split(',')[0])), int(float(point.split(',')[1])))
+                    xtl = int(p[0] - (CONER_ROI_SIZE)/2)
+                    ytl = int(p[1] - (CONER_ROI_SIZE)/2)
+                    xbr = int(p[0] + (CONER_ROI_SIZE)/2)
+                    ybr = int(p[1] + (CONER_ROI_SIZE)/2)
+                    xtl = xtl if xtl > 0 else 0
+                    ytl = ytl if ytl > 0 else 0
+                    xbr = xbr if xbr < width else width
+                    ybr = ybr if ybr < height else height
+                    cv2.rectangle(imgdata, (int(xbr), int(ybr)), (int(xtl), int(ytl)), (0, 0, 255))
+                    labelID = 0 #! TODO
+                    b = (float(xtl), float(xbr), float(ytl), float(ybr))
+                    bb = convert((width, height), b)
+                    outFile.write(str(labelID) + " " + " ".join([str(a) for a in bb]) + '\n')
+                    cv2.circle(imgdata, (p[0], p[1]), 4, (0, 0, 255), -1)
+                    cv2.rectangle(imgdata, (xtl, ytl), (xbr, ybr), (255, 0, 0))
 
-                # The second entry point
-                enterPoint2 = (int(float(points[1].split(',')[0])), int(float(points[1].split(',')[1])))
-                xtl2 = int(enterPoint2[0] - (CONER_ROI_SIZE)/2)
-                ytl2 = int(enterPoint2[1] - (CONER_ROI_SIZE)/2)
-                xbr2 = int(enterPoint2[0] + (CONER_ROI_SIZE)/2)
-                ybr2 = int(enterPoint2[1] + (CONER_ROI_SIZE)/2)
-                xtl2 = xtl2 if xtl2 > 0 else 0
-                ytl2 = ytl2 if ytl2 > 0 else 0
-                xbr2 = xbr2 if xbr2< width else width
-                ybr2 = ybr2 if ybr2 < height else height
-                cv2.rectangle(imgdata, (int(xbr2), int(ybr2)), (int(xtl2), int(ytl2)), (0, 0, 255))
-                labelID = 0 #! TODO
-                b = (float(xtl2), float(xbr2), float(ytl2), float(ybr2))
-                bb = convert((width, height), b)
-                outFile.write(str(labelID) + " " + " ".join([str(a) for a in bb]) + '\n')
-                cv2.circle(imgdata, (enterPoint2[0], enterPoint2[1]), 4, (0, 0, 255), -1)
-                cv2.rectangle(imgdata, (xtl2, ytl2), (xbr2, ybr2), (255, 0, 0))
+                # # The first entry point
+                # enterPoint1 = (int(float(points[0].split(',')[0])), int(float(points[0].split(',')[1])))
+                # xtl1 = int(enterPoint1[0] - (CONER_ROI_SIZE)/2)
+                # ytl1 = int(enterPoint1[1] - (CONER_ROI_SIZE)/2)
+                # xbr1 = int(enterPoint1[0] + (CONER_ROI_SIZE)/2)
+                # ybr1 = int(enterPoint1[1] + (CONER_ROI_SIZE)/2)
+                # xtl1 = xtl1 if xtl1 > 0 else 0
+                # ytl1 = ytl1 if ytl1 > 0 else 0
+                # xbr1 = xbr1 if xbr1 < width else width
+                # ybr1 = ybr1 if ybr1 < height else height
+                # cv2.rectangle(imgdata, (int(xbr1), int(ybr1)), (int(xtl1), int(ytl1)), (0, 0, 255))
+                # labelID = 0 #! TODO
+                # b = (float(xtl1), float(xbr1), float(ytl1), float(ybr1))
+                # bb = convert((width, height), b)
+                # outFile.write(str(labelID) + " " + " ".join([str(a) for a in bb]) + '\n')
+                # cv2.circle(imgdata, (enterPoint1[0], enterPoint1[1]), 4, (0, 0, 255), -1)
+                # cv2.rectangle(imgdata, (xtl1, ytl1), (xbr1, ybr1), (255, 0, 0))
+
+                # # The second entry point
+                # enterPoint2 = (int(float(points[1].split(',')[0])), int(float(points[1].split(',')[1])))
+                # xtl2 = int(enterPoint2[0] - (CONER_ROI_SIZE)/2)
+                # ytl2 = int(enterPoint2[1] - (CONER_ROI_SIZE)/2)
+                # xbr2 = int(enterPoint2[0] + (CONER_ROI_SIZE)/2)
+                # ybr2 = int(enterPoint2[1] + (CONER_ROI_SIZE)/2)
+                # xtl2 = xtl2 if xtl2 > 0 else 0
+                # ytl2 = ytl2 if ytl2 > 0 else 0
+                # xbr2 = xbr2 if xbr2< width else width
+                # ybr2 = ybr2 if ybr2 < height else height
+                # cv2.rectangle(imgdata, (int(xbr2), int(ybr2)), (int(xtl2), int(ytl2)), (0, 0, 255))
+                # labelID = 0 #! TODO
+                # b = (float(xtl2), float(xbr2), float(ytl2), float(ybr2))
+                # bb = convert((width, height), b)
+                # outFile.write(str(labelID) + " " + " ".join([str(a) for a in bb]) + '\n')
+                # cv2.circle(imgdata, (enterPoint2[0], enterPoint2[1]), 4, (0, 0, 255), -1)
+                # cv2.rectangle(imgdata, (xtl2, ytl2), (xbr2, ybr2), (255, 0, 0))
             outFile.close()
             if COPY_TXT_TO_IMG_FOLDER:
                 dst_txt = os.path.join(img_dir, os.path.basename(txtPath))
