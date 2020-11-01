@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Reference VOC scrips
 # Author : Andy Liu
-# last modify : 2020-09-27
+# last modify : 2020-11-01
 
 # This tool is used to convert VOC xml format to YOLO V3 format
 # And pick 80% for train, left for val
