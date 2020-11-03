@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Author : Andy Liu
-# Last modified: 2018-9-6
+# Last modified: 2020-11-02
 
 # This tool is used to convert image abs path into txt
 # input: python abspath2txt.py "/home/andy/Data/img"
