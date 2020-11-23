@@ -169,6 +169,7 @@ def convert_annotation(xml_dir, img_dir):
                 label = polygon.getAttribute("label")
                 points = polygon.getAttribute('points').split(';')
 
+                # Draw all points
                 for point in points:
                     p = (int(float(point.split(',')[0])), int(float(point.split(',')[1])))
                     xtl = int(p[0] - (CONER_ROI_SIZE)/2)
@@ -187,7 +188,7 @@ def convert_annotation(xml_dir, img_dir):
                     cv2.circle(imgdata, (p[0], p[1]), 4, (0, 0, 255), -1)
                     cv2.rectangle(imgdata, (xtl, ytl), (xbr, ybr), (255, 0, 0))
 
-                # # The first entry point
+                # # Only draw entry points
                 # enterPoint1 = (int(float(points[0].split(',')[0])), int(float(points[0].split(',')[1])))
                 # xtl1 = int(enterPoint1[0] - (CONER_ROI_SIZE)/2)
                 # ytl1 = int(enterPoint1[1] - (CONER_ROI_SIZE)/2)
@@ -227,7 +228,7 @@ def convert_annotation(xml_dir, img_dir):
                 dst_txt = os.path.join(img_dir, os.path.basename(txtPath))
                 shutil.copyfile(txtPath, dst_txt)
             if DRAW_LABEL:
-                draw_path =  xml_dir + "_" + draw_folder
+                draw_path =  os.path.join(xml_dir + "_" + draw_folder, os.path.dirname(imagePath).split("/")[-1])
                 if not os.path.exists(draw_path):
                     os.makedirs(draw_path)
                 new_img = os.path.join(draw_path, os.path.basename(imagePath))
