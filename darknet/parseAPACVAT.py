@@ -18,7 +18,7 @@
 #     ├── 1.xml
 #     └── 2.xml
 
-# input : python xml2txt.py "./label"   "./img"
+# input : python parseAPACVAT.py "./label"   "./img"
 # output :
 #       ./txt
 #		./train.txt
