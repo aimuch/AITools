@@ -178,6 +178,8 @@ def convert_annotation(xml_dir, img_dir):
                     ybr = int(p[1] + (CONER_ROI_SIZE)/2)
                     xtl = xtl if xtl > 0 else 0
                     ytl = ytl if ytl > 0 else 0
+                    if xtl > width or ytl > height:
+                        continue
                     if xbr < 0 or ybr < 0:
                         continue
                     xbr = xbr if xbr < width else width
