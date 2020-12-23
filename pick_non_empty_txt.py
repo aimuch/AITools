@@ -2,7 +2,7 @@
 # Author : Andy Liu
 # Last modified: 2018-8-14
 # This tool is used to remove empty text files frome txt folder
-# input : python txt2xml.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
+# input : pick_non_empty_txt.py "/home/andy/data/ann_dir" "/home/andy/data/img_dir"
 # output:
 #   ./dst_txt
 #   ./dst_img
