@@ -178,6 +178,8 @@ def convert_annotation(xml_dir, img_dir):
                     ybr = int(p[1] + (CONER_ROI_SIZE)/2)
                     xtl = xtl if xtl > 0 else 0
                     ytl = ytl if ytl > 0 else 0
+                    if xbr < 0 or ybr < 0:
+                        continue
                     xbr = xbr if xbr < width else width
                     ybr = ybr if ybr < height else height
                     cv2.rectangle(imgdata, (int(xbr), int(ybr)), (int(xtl), int(ytl)), (0, 0, 255))
