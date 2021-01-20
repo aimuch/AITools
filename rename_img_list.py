@@ -7,7 +7,6 @@ import shutil
 import sys
 import argparse
 import random
-from tqdm import tqdm
 
 matched_list_path = "./match_list.txt"
 
@@ -28,7 +27,7 @@ def rename(srcPath, dstPath, matchedListPath):
     print(matchedListPath)
     srcList = os.listdir(srcPath)
     outputFile = open(matchedListPath,'w+')
-    for i, f in tqdm(enumerate(srcList)):
+    for i, f in enumerate(srcList):
         fileInfo = f.split(".")
         srcFilePath = os.path.join(srcPath, f)
         dstFilePath = os.path.join(dstPath, str(i)+"."+fileInfo[-1])
