@@ -30,10 +30,17 @@ def rename(srcImgPath, dstImgPath, srcTxtPath, dstTxtPath, matchedListPath):
     file_.close()
     for line in lines:
         i, imgName = line.split(",")
-        if i not in srcImgList and i not in srcTxtList:
+        imgInfor = imgName.split(".")
+        i_img = i+"."+imgInfor[-1]
+        i_txt = i+".txt"
+        if i_img not in srcImgList:
+            print(f"{i_img} is not exists!")
             continue
-        srcImgFilePath = os.path.join(srcImgPath, i)
-        srcTxtFilePath = os.path.join(srcTxtPath, i)
+        if i_txt not in srcTxtList:
+            print(f"{i_txt} is not exists!")
+            continue
+        srcImgFilePath = os.path.join(srcImgPath, i_img)
+        srcTxtFilePath = os.path.join(srcTxtPath, i_txt)
         dstImgFilePath = os.path.join(dstImgPath, imgName)
         dstTxtFilePath = os.path.join(dstTxtPath, imgName.split(".")[0]+".txt")
         shutil.copyfile(srcImgFilePath, dstImgFilePath)
