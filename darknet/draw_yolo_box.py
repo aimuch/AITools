@@ -8,7 +8,7 @@ def drowBox(imgPath,txtPath, destPath):
 	thickness = 1 
 	lineType = 4
 	for name in os.listdir(imgPath):
-		name = name.strip('.jpg')
+		name = name.rstrip('.jpg')
 		print(name)
 
 		img = os.path.join(imgPath, name) + '.jpg'		
