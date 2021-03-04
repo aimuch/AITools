@@ -22,6 +22,7 @@ def rename(srcPath, dstPath, matchedListPath):
     src_list = []
     dst_list = []
     srcList = os.listdir(srcPath)
+    srcList = srcList.sort()
     outputFile = open(matchedListPath,'w+')
     for i, f in enumerate(srcList):
         fileInfo = f.split(".")
