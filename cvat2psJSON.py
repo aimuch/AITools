@@ -12,10 +12,11 @@ import random
 import shutil
 import json
 import xml.dom.minidom
+from numpy.lib.function_base import delete
 from tqdm import tqdm
 
-point_type = {"T":0, "L":1}
-slot_type = {"vertical":1, "perpendicular":1}
+point_type = {"T":0,"U":0, "V":0, "ST":0, "L":1, "SL":1}
+slot_type = {"vertical":0, "slanted":0, "perpendicular":1, "horizontal":1}
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Convert CVAT labels to PS2.0 JSON')
@@ -46,13 +47,19 @@ class cvat2jsons:
             self.usingROI = True
         self.roiXbias = 0
         self.roiYbias = 0
+        self.logPath = "./log.txt"
+        self.logWriter = open(self.logPath, "w")
         print("init done!")
+
+    def __del__(self):
+        self.logWriter.close()
 
     def run(self):
         cvatXmlList = os.listdir(self.srcLabelPath)
         for xml in cvatXmlList:
             xml_path = os.path.join(self.srcLabelPath, xml)
             self.cvat2json(xml_path)
+            self.logWriter.flush() # every xml flush IO buffer
 
     def write_json(self, name, data) -> None:
         """
@@ -79,7 +86,7 @@ class cvat2jsons:
         # ---- An  xml file in the cvat annotation file corresponds to a picture of a video ---- #
         img_list = annotation.getElementsByTagName('image')
 
-        for img in img_list:
+        for img in tqdm(img_list):
             imageID = img.getAttribute("id")
             imageName = img.getAttribute("name")
 
@@ -97,6 +104,7 @@ class cvat2jsons:
             picturepath = os.path.join(self.srcJpgPath, imageName)
             dstImgPath = os.path.join(self.dstJpgPath, imageName)
             if not os.path.exists(picturepath):
+                self.logWriter.write(picturepath + "\n")
                 print(picturepath, " is not exists!")
                 continue
             imgSrc = cv2.imread(picturepath)
@@ -178,7 +186,6 @@ if __name__ == '__main__':
         os.makedirs(dstJpgPath)
         print("%s is not exists, it has created!"%dstJpgPath)
 
-    roiShape = (-1, -1)
     instance = cvat2jsons(srcLabelPath, srcJpgPath, dstJsonPath, dstJpgPath, roiShape)
     instance.run()
     print("Done!")
