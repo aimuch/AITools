@@ -2,6 +2,8 @@
 # Author : Andy Liu
 # Last modified: 2019-03-15
 
+# TensorRT Version <= 4
+
 # This script is used to convert .uff file to .engine for TX2/PX2 or other NVIDIA Platform
 # Using: 
 #        python uff_to_engine.py

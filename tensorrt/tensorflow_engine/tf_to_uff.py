@@ -2,6 +2,8 @@
 # Author : Andy Liu
 # Last modified: 2019-03-15
 
+# TensorRT Version <= 4
+
 # This script is used to convert tensorflow model file to uff file
 # Using: 
 #        python tf_to_uff.py
