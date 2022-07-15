@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 # Author : Andy Liu
 # Last modified: 2020-11-01
+"""
+├── test
+│   ├── ann
+│   └── img
+└── train
+    ├── ann
+    └── img
+"""
 
 import os
 import shutil
