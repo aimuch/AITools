@@ -35,23 +35,40 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('srclabel', help='label directory', type=str)
     parser.add_argument('srcimg', help='images directory', type=str)
-    parser.add_argument('train', help='train directory', type=str)
-    parser.add_argument('test', help='test directory', type=str)
-    parser.add_argument('val_rate', help='val rate', type=float)
+    parser.add_argument('train', default='./train', help='train directory', type=str)
+    parser.add_argument('val', default='./val', help='test directory', type=str)
+    parser.add_argument('val_rate', default=0.2 help='val rate', type=float)
 
     args = parser.parse_args()
     return args
 
 
-def pick(srclabel, srcimg):
+def pick(srclabel, srcimg, train_path, val_path, val_rate):
     srclabel = os.path.abspath(srclabel)
     if srclabel[-1] == "/":
         srclabel = srclabel[:-1]
+    if srcimg[-1] == "/":
+        srcimg = srcimg[:-1]
+
+    train_path = os.path.abspath(train_path)
+    if os.path.exists(train_path):
+        shutil.rmtree(train_path)
+    os.makedirs(train_path)
+    os.makedirs(os.path.join(train_path, 'img'))
+    os.makedirs(os.path.join(train_path, 'ann'))
+
+    val_path = os.path.abspath(val_path)
+    if os.path.exists(val_path):
+        shutil.rmtree(val_path)
+    os.makedirs(val_path)
+    os.makedirs(os.path.join(val_path, 'img'))
+    os.makedirs(os.path.join(val_path, 'ann'))
 
     labellists = os.listdir(srclabel)
     random.shuffle(labellists)
     val_num = int(len(labellists)*val_rate)
-    # val_num = 800
+    if val_num <= 50:
+        val_num = 50
     valset = random.sample(labellists, val_num)
 
 
