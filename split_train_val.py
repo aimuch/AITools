@@ -35,6 +35,9 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('srclabel', help='label directory', type=str)
     parser.add_argument('srcimg', help='images directory', type=str)
+    parser.add_argument('train', help='train directory', type=str)
+    parser.add_argument('test', help='test directory', type=str)
+    parser.add_argument('val_rate', help='val rate', type=float)
 
     args = parser.parse_args()
     return args
