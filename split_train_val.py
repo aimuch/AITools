@@ -64,7 +64,8 @@ def pick(srclabel, srcimg, train_path="./train", val_path="./val", val_rate=0.2)
         label_info = label.split(".")
         if label_info[-1] != "xml":
             if label_info[-1] != "txt":
-                continue
+                if label_info[-1] != "png":
+                    continue
 
         label_path = os.path.join(srclabel, label)
         img_path = os.path.join(srcimg, label_info[0]+".jpg")
