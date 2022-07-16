@@ -30,7 +30,7 @@ def parse_args():
     return args
 
 
-def pick(srclabel, srcimg, train_path, val_path, val_rate):
+def pick(srclabel, srcimg, train_path="./train", val_path="./val", val_rate=0.2):
     srclabel = os.path.abspath(srclabel)
     if srclabel[-1] == "/":
         srclabel = srclabel[:-1]
