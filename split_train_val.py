@@ -20,11 +20,11 @@ from tqdm import tqdm
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('srclabel', help='label directory', type=str)
-    parser.add_argument('srcimg', help='images directory', type=str)
-    parser.add_argument('train', default='./train', help='train directory', type=str)
-    parser.add_argument('val', default='./val', help='test directory', type=str)
-    parser.add_argument('val_rate', default=0.2, help='val rate', type=float)
+    parser.add_argument('--srclabel', help='label directory', type=str)
+    parser.add_argument('--srcimg', help='images directory', type=str)
+    parser.add_argument('--train', default='./train', help='train directory', type=str)
+    parser.add_argument('--val', default='./val', help='test directory', type=str)
+    parser.add_argument('--val_rate', default=0.2, help='val rate', type=float)
 
     args = parser.parse_args()
     return args
@@ -62,9 +62,9 @@ def pick(srclabel, srcimg, train_path="./train", val_path="./val", val_rate=0.2)
 
     for label in tqdm(labellists):
         label_info = label.split(".")
-        if label_info[-1] != "xml":
-            if label_info[-1] != "txt":
-                if label_info[-1] != "png":
+        if label_info[-1] != "xml":             # label file extension is .xml
+            if label_info[-1] != "txt":         # label file extension is .txt
+                if label_info[-1] != "png":     # label file extension is .png
                     continue
 
         label_path = os.path.join(srclabel, label)
