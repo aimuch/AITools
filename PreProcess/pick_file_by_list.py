@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # Author : Andy Liu
-# Last modified: 2021-08-04
+# Last modified: 2023-03-06
 
 # This tool is used to pick images by text list
-# input: python3 remove_img_by_list.py "good.txt" "/home/andy/data/img"
+# input: python3 remove_img_by_list.py "good.txt" "/home/andy/data/img" '.jpg'
 # output:
 # 	./pickedImgOut
 
@@ -40,7 +40,8 @@ def pick(fileListTxt, fileDir, ext):
     os.makedirs(pickedPath)
 
     file_ = open(fileListTxt, 'r')
-    goodfileList = [f.strip().split(".")[0] for f in file_.readlines()]
+    # goodfileList = [f.strip().split(".")[0] for f in file_.readlines()]
+    goodfileList = [f.strip() for f in file_.readlines()]
 
     # print([item for item, count in collections.Counter(goodfileList).items() if count > 1])
 
