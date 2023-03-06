@@ -14,6 +14,8 @@ import argparse
 import collections
 from tqdm import tqdm
 
+RECREATE_FOLDER = True
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('fileListTxt', help='text file', type=str)
@@ -26,18 +28,20 @@ def parse_args():
 
 
 def pick(fileListTxt, fileDir, ext):
-    if "." in ext:
-        ext = ext.split(".")[-1]
+    if "." == ext[0]:
+        ext = ext[1:]
     pickedPath = "./pickedFilesOut"
 
     fileDir = os.path.abspath(fileDir)
     if fileDir[-1] == "/":
         fileDir = fileDir[:-1]
 
-    # recreate folder
-    if os.path.exists(pickedPath):
-        shutil.rmtree(pickedPath)
-    os.makedirs(pickedPath)
+    if RECREATE_FOLDER:
+        # recreate folder
+        if os.path.exists(pickedPath):
+            shutil.rmtree(pickedPath)
+    if not os.path.exists(pickedPath):
+        os.makedirs(pickedPath)
 
     file_ = open(fileListTxt, 'r')
     # goodfileList = [f.strip().split(".")[0] for f in file_.readlines()]
